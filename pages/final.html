@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>真相</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(170deg, #0f141c 0%, #1a2332 45%, #263548 100%);
+            padding: 50px 20px; display: flex; justify-content: center;
+        }
+        .letter {
+            max-width: 720px; background: #f2eeda; border-radius: 10px;
+            padding: 52px 58px; box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+            position: relative; font-family: "Songti SC", "SimSun", serif;
+        }
+        .letter::before {
+            content: "🕯️"; position: absolute; top: -26px; left: 50%; transform: translateX(-50%);
+            font-size: 44px; background: #f2eeda; border-radius: 50%;
+            width: 64px; height: 64px; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+        }
+        h1 { font-size: 24px; color: #1a2332; margin-bottom: 22px; text-align: center; letter-spacing: 4px; }
+        .letter p { font-size: 15px; line-height: 2.1; color: #4a4438; text-indent: 2em; margin-bottom: 12px; }
+        .letter .sig { text-align: right; margin-top: 28px; color: #8a8578; }
+        .letter .sig .name { font-size: 18px; color: #1a2332; font-weight: 700; }
+        .evidence {
+            background: #e8e0c0; border: 1px dashed #8f6a1a; border-radius: 10px;
+            padding: 18px 22px; margin: 22px 0; font-size: 14px; line-height: 2.0; color: #4a3f2a;
+        }
+        .evidence b { color: #8f3d3d; }
+        .evidence .code { font-family: monospace; background: #f7f5ee; padding: 1px 6px; border-radius: 4px; font-size: 12.5px; }
+        .final-btn {
+            display: block; margin: 30px auto 0; padding: 14px 48px;
+            background: linear-gradient(to bottom, #44566b, #2c3e50); color: #dfe6ec;
+            border: none; border-radius: 999px; font-size: 16px; cursor: pointer;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.45); transition: all 0.15s;
+        }
+        .final-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,0.55); }
+        .end-note { text-align: center; color: #8a8578; font-size: 12px; margin-top: 18px; letter-spacing: 2px; }
+        .toast {
+            display: none; position: fixed; top: 40px; left: 50%; transform: translateX(-50%);
+            background: rgba(10,14,20,0.9); color: #dfe6ec; padding: 14px 28px;
+            border-radius: 999px; font-size: 14px; z-index: 999;
+        }
+        .ghost-line { text-align: center; color: #8a8578; font-size: 13px; margin-top: 22px; letter-spacing: 6px; }
+    </style>
+</head>
+<body>
+    <div class="letter">
+        <h1>最后一篇《常规》</h1>
+
+        <p>我是姜，高二（3）班学生。按学校规定，每扣一分要抄一遍《常规》。这篇，是我抄的第十二遍。</p>
+
+        <p>但我这次不准备按它的格式写了。因为我已经知道，《常规》从头到尾，<strong>都不是检讨书</strong>。</p>
+
+        <p>葛帮我数过：48 条常规，每一条的句式都是"必须""不得""一律"——它不像规则，像<strong>祷词</strong>。
+        落款处叠着一排一排的名字，从 1998 年开始，一年一年往下排。那不是签名，<strong>是登记</strong>。</p>
+
+        <p>扣分从来不是惩罚。扣一分，就是在名单上写一次你的名字；抄一遍常规，就是把你的名字
+        再喂给那本本子一次。被扣得越多的人，越困、越恍惚、越"安静"——<strong>名字被念得多了，魂就跟着走了</strong>。</p>
+
+        <p>孙某、刘某、赵某，还有每年"转学"的那些人，不是去了更好的学校。<strong>是名单满了。</strong></p>
+
+        <p>1998 年 6 月 1 日，旧教学楼封闭。那栋楼建在城隍庙的旧址上，庙毁了几十年，
+        可地基底下压着的东西没有散。寇润平校长那年起草了封闭报告——"庙底下压着的东西，不能见光"——
+        可他没压住它，他只学会了<strong>喂它</strong>。</p>
+
+        <p>升学率神话、一本率第一、二十年的"蓬莱奇迹"——都是用名字换的。
+        任校长的"大脑分区理论"，是把我们分成一块一块来收割；
+        李主任的走廊巡查，是在数名单上还差几个名字；
+        王老师的吼声，是镇不住的时候在喊；邢老师收走的挂件，
+        是怕你带着护身的东西。而夜里宿舍走廊那第四个脚步声——
+        <strong>它在找名字还没抄完的人。</strong></p>
+
+        <div class="evidence">
+            📂 <b>随这篇《常规》附上的证据：</b><br>
+            ① 扣分登记表（2025-2026上，李志胜签）——名单与"转学"记录重合<br>
+            ② 《常规》抄写本 37 本，落款人数比扣分名单多 6 人<br>
+            ③ 德育处值班日志（脚步声记录、会议记录、常规核查）<br>
+            ④ 校史特刊底稿 + 1998 年封闭报告涂改页复印件<br>
+            ⑤ 校园墙归档区 2018 届管理员留档（完整版）
+        </div>
+
+        <p>教育局纪检科的地址，我已经写在证据袋上了。这些东西，不该被压在地基底下，
+        也不该烂在级部的柜子里。<strong>它们该被看见。</strong></p>
+
+        <p>对了，还有一件事。</p>
+
+        <p>李志胜主任问我，回宿舍的路上为什么不跑起来。我说我累了。<br>
+        现在我知道了——那晚的脚步声，不是他。</p>
+
+        <p>这一次，我跑起来了。</p>
+
+        <div class="sig">
+            —— <span class="name">姜</span><br>
+            2025 年 12 月 24 日 · 于教学楼三层
+        </div>
+
+        <button class="final-btn" onclick="report()">📤 将证据提交至教育局纪检科</button>
+        <div class="ghost-line">—— 蓬莱一中 · 夜晚的脚步声 · 完 ——</div>
+    </div>
+
+    <div class="toast" id="toast">✅ 提交成功。当晚，宿舍走廊里再没有脚步声了。名单，停在了那一页。</div>
+
+    <script>
+        function report() {
+            document.getElementById('toast').style.display = 'block';
+            const btn = document.querySelector('.final-btn');
+            btn.disabled = true;
+            btn.textContent = '✅ 已提交';
+            btn.style.opacity = 0.7;
+        }
+    </script>
+</body>
+</html>

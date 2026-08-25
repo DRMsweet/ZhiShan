@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>校园公告</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+        body { background: #232d3b; padding: 30px 20px 60px; }
+        .topbar { max-width: 780px; margin: 0 auto 20px; display: flex; align-items: center; gap: 12px; }
+        .progress { background: #3d4f63; color: #dfe6ec; padding: 4px 12px; border-radius: 999px; font-size: 12px; font-family: monospace; }
+        .back { color: #8a97a5; text-decoration: none; font-size: 13px; }
+        .back:hover { color: #aebccb; }
+        .board {
+            max-width: 780px; margin: 0 auto; background: #f7f5ee;
+            border-radius: 14px; padding: 26px 32px;
+            box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+        }
+        h2 { color: #1a2332; margin-bottom: 18px; font-size: 19px; }
+        .notice-item { border: 1px solid #e4dfd0; border-radius: 10px; padding: 15px 18px; margin-bottom: 13px; }
+        .notice-item h3 { font-size: 15px; color: #333; margin-bottom: 5px; }
+        .notice-item .meta { font-size: 12px; color: #a09880; margin-bottom: 7px; }
+        .notice-item p { font-size: 13.5px; line-height: 1.8; color: #555; }
+        .notice-item.punish { border-left: 5px solid #8f3d3d; background: #faf3f0; }
+        .notice-item.punish h3 { color: #8f3d3d; }
+        .notice-item .kbd { display: inline-block; background: #2c3e50; color: #dfe6ec; padding: 1px 8px; border-radius: 4px; font-family: monospace; font-size: 12px; }
+        .notice-item .hl { color: #8f6a1a; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <span class="progress">4/12</span>
+        <a class="back" href="../desk.html">← 返回终端</a>
+    </div>
+
+    <div class="board">
+        <h2>📢 校园公告栏（12月）</h2>
+
+        <div class="notice-item punish">
+            <h3>违纪通报（第 12 周）</h3>
+            <div class="meta">级部 · 2025-12-18</div>
+            <p>以下同学违反《常规管理规定》，现予以通报：<br>
+            <b>姜（高二3班）</b>：12.16 回宿舍路上未按要求跑步，态度消极，记 3 分，回家反思一周。<br>
+            <b>陈（高二3班）</b>：12.18 宿舍内从床上跳下，记 2 分。<br>
+            <b>于（高二3班）</b>：12.19 午休期间床上存放违规物品，记 2 分。<br>
+            以上同学请于本周五前将《常规》抄写本交至级部。<span class="hl">（李志胜 签）</span></p>
+        </div>
+
+        <div class="notice-item">
+            <h3>关于《常规》抄写要求的再次重申</h3>
+            <div class="meta">德育处 · 2025-12-15</div>
+            <p>按《蓬莱一中学生常规管理规定》第三条：<b>每扣 1 分，手抄《常规》一遍并上交。</b>抄写须工整、完整，
+            不得涂改，落款处须注明班级、姓名、日期。凡字迹潦草、疑似代抄者，一律退回重抄。</p>
+        </div>
+
+        <div class="notice-item">
+            <h3>本周三（12.24）操场动员大会</h3>
+            <div class="meta">教务处 · 2025-12-20</div>
+            <p>全体师生 14:00 在操场集合。任党林副校长将就"学习效率与身体锻炼"发表讲话，
+            请各班班主任维持好会场秩序。<span class="hl">（注：上次大会个别班级出现不尊重领导的现象，本次务必杜绝。）</span></p>
+        </div>
+
+        <div class="notice-item">
+            <h3>失物招领公告</h3>
+            <div class="meta">德育处 · 2025-12-20</div>
+            <p>近期没收物品已登记入库：挂件×1（红白巫女样式）、挂件×1（黑帽魔法使样式）、小说×3、
+            充电宝×2。请相关同学于本周内到德育处<b>失物招领柜</b>领取。领取需本人登记。</p>
+        </div>
+
+        <div class="notice-item">
+            <h3>校园墙（匿名留言板）系统维护通知</h3>
+            <div class="meta">网络信息中心 · 2025-12-19</div>
+            <p>校园墙将于近期升级。历史匿名帖将分批归档，管理员账号 <span class="kbd">jiushi</span>
+            需重新验证口令后方可查看<b>归档区</b>内容，其他用户不受影响。</p>
+        </div>
+
+        <div class="notice-item">
+            <h3>早自习后作息提醒</h3>
+            <div class="meta">德育处 · 2025-12-12</div>
+            <p>早自习下课后，请同学们前往食堂就餐，<b>不得趴在教室桌上睡觉</b>。
+            近期将由任党林副校长不定时巡查各班，发现趴桌睡觉者，一律记录扣分。</p>
+        </div>
+    </div>
+</body>
+</html>

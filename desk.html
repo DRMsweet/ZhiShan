@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>教学楼终端</title>
+    <style>
+        :root {
+            --ink: #1a2332;
+            --blue: #4a90d9;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+
+        body {
+            height: 100vh; width: 100vw; overflow: hidden;
+            background: linear-gradient(135deg, #1a2332 0%, #2c3e50 40%, #374a5e 75%, #2e4053 100%);
+            user-select: text;
+        }
+
+        /* --- 顶部菜单栏 --- */
+        .menubar {
+            position: fixed; top: 0; left: 0; width: 100%; height: 30px;
+            background: rgba(20, 28, 40, 0.65); backdrop-filter: blur(10px);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 20px; font-size: 13px; color: #c8d2dc; z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .menubar-left span, .menubar-right span { margin: 0 8px; font-weight: 500; }
+
+        /* --- 桌面图标 --- */
+        .desktop-icons {
+            position: absolute; top: 50px; left: 20px;
+            display: flex; flex-direction: column;
+        }
+        .desktop-icon {
+            width: 80px; height: 92px; margin: 8px 0;
+            display: flex; flex-direction: column; align-items: center;
+            cursor: pointer; text-align: center; text-decoration: none;
+        }
+        .icon-image {
+            width: 60px; height: 60px; border-radius: 14px;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 28px; box-shadow: 0 5px 12px rgba(0,0,0,0.3);
+            transition: box-shadow 0.2s;
+        }
+        .icon-image:hover { box-shadow: 0 0 0 3px rgba(120,160,200,0.4); }
+        .icon-label {
+            margin-top: 6px; font-size: 12px; font-weight: 500; color: #dfe6ec;
+            background: rgba(20,28,40,0.6); padding: 2px 8px; border-radius: 6px;
+        }
+
+        /* --- Spotlight 搜索 --- */
+        .spotlight {
+            position: absolute; top: 130px; left: 50%; transform: translateX(-50%);
+            width: 520px; z-index: 200;
+        }
+        .search-bar {
+            height: 42px; background: rgba(28, 38, 52, 0.92);
+            backdrop-filter: blur(20px); border-radius: 12px; border: 1px solid rgba(255,255,255,0.08);
+            padding: 0 16px; display: flex; align-items: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.45); font-size: 16px; color: #7a8896;
+        }
+        .search-bar input {
+            flex-grow: 1; border: none; background: transparent; outline: none;
+            font-size: 16px; padding-left: 10px; color: #dfe6ec;
+        }
+        .search-bar input::placeholder { color: #5a6a7a; }
+        #search-results {
+            width: 100%; max-height: 380px; overflow-y: auto;
+            background: rgba(28, 38, 52, 0.95); backdrop-filter: blur(20px);
+            border-radius: 0 0 12px 12px; margin-top: 4px; border: 1px solid rgba(255,255,255,0.06);
+            padding: 8px 0; box-shadow: 0 15px 40px rgba(0,0,0,0.45);
+            display: none; z-index: 199;
+        }
+        .result-item {
+            display: flex; align-items: center; padding: 9px 16px;
+            cursor: pointer; text-decoration: none; color: #dfe6ec;
+            transition: background-color 0.1s;
+        }
+        .result-item:hover { background-color: rgba(120,160,200,0.15); }
+        .result-icon {
+            width: 26px; height: 26px; border-radius: 6px; margin-right: 12px;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 14px; font-weight: bold; color: white;
+        }
+        .result-label { font-size: 14px; font-weight: 500; }
+        .result-detail { font-size: 12px; color: #7a8896; margin-left: auto; padding-left: 12px; }
+
+        /* --- 便签 --- */
+        .sticky-note {
+            position: fixed; top: 60px; right: 36px; width: 250px;
+            background: #f5ecd0; padding: 15px; border-radius: 8px;
+            border-left: 5px solid #c9a227; font-size: 13px; line-height: 1.7;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.35); z-index: 50; color: #4a3f2a;
+        }
+        .sticky-note h4 { color: #8a6d1a; margin-bottom: 6px; font-size: 14px; }
+        .sticky-note ul { list-style: none; padding-left: 0; }
+        .sticky-note li { margin-bottom: 4px; }
+        .sticky-note-2 {
+            position: fixed; top: 260px; right: 36px; width: 250px;
+            background: rgba(26, 36, 50, 0.9); padding: 15px; border-radius: 8px;
+            border-left: 5px solid #4a90d9; font-size: 12px; line-height: 1.8;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.35); z-index: 50; color: #aebccb;
+        }
+
+        /* --- Dock --- */
+        .dock {
+            position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%);
+            height: 62px; background: rgba(24, 32, 44, 0.6); backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 18px;
+            display: flex; align-items: center; padding: 0 14px; gap: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4); z-index: 999;
+        }
+        .dock-link { text-decoration: none; }
+        .dock-icon {
+            width: 46px; height: 46px; border-radius: 12px;
+            background: linear-gradient(to bottom, #33445a, #24334a);
+            display: flex; justify-content: center; align-items: center;
+            font-size: 24px; cursor: pointer;
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .dock-icon:hover { transform: translateY(-14px) scale(1.1); }
+
+        /* --- 进度徽章 --- */
+        .progress {
+            position: fixed; bottom: 20px; right: 20px;
+            background: rgba(0,0,0,0.55); color: #dfe6ec;
+            padding: 6px 12px; border-radius: 8px;
+            font-family: monospace; font-size: 0.85rem; z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="menubar">
+        <div class="menubar-left">
+            <span>🌙</span><span>蓬莱一中</span><span>教学楼终端</span><span>帮助</span>
+        </div>
+        <div class="menubar-right">
+            <span>100%</span><span>Wi-Fi</span><span>12月22日 周一</span>
+        </div>
+    </div>
+
+    <!-- 桌面图标：直接可点的入口 -->
+    <div class="desktop-icons">
+        <a href="pages/chat.html" target="_blank" class="desktop-icon">
+            <div class="icon-image" style="background:#3d6a8f;">💬</div>
+            <div class="icon-label">班级群聊</div>
+        </a>
+        <a href="pages/notice.html" target="_blank" class="desktop-icon">
+            <div class="icon-image" style="background:#8f6a3d;">📢</div>
+            <div class="icon-label">校园公告</div>
+        </a>
+        <a href="pages/calendar.html" target="_blank" class="desktop-icon">
+            <div class="icon-image" style="background:#6a4a8f;">📅</div>
+            <div class="icon-label">校历·查宿</div>
+        </a>
+        <a href="pages/grades.html" target="_blank" class="desktop-icon">
+            <div class="icon-image" style="background:#3d6a55;">📋</div>
+            <div class="icon-label">扣分登记表</div>
+        </a>
+    </div>
+
+    <!-- Spotlight 搜索 -->
+    <div class="spotlight">
+        <div class="search-bar">
+            <span>🔍</span>
+            <input type="text" id="search-input" placeholder="搜索这台电脑中的内容..." autocomplete="off"
+                   onkeyup="searchDesktop()" onfocus="if(this.value) searchDesktop()"
+                   onblur="setTimeout(()=>{ if(!this.value) hideResults(); }, 150)">
+        </div>
+        <div id="search-results"></div>
+    </div>
+
+    <!-- 便签 -->
+    <div class="sticky-note">
+        <h4>🚨 待办（级部）</h4>
+        <ul>
+            <li style="text-decoration: line-through; color:#a8956a;">核对上周扣分表</li>
+            <li style="text-decoration: line-through; color:#a8956a;">常规抄写本催收</li>
+            <li><strong>本周五前完成违纪通报公示</strong></li>
+            <li>宿舍巡查排班表张贴</li>
+        </ul>
+    </div>
+
+    <div class="sticky-note-2">
+        <h4 style="color:#4a90d9;">💡 备注</h4>
+        <p>这台电脑是教学楼走廊的公共终端，所有学生均可使用。</p>
+        <p>信息获取仅依赖内部搜索，无需外部搜索。</p>
+        <p>部分页面（3/4/5/8/10页）不包含关键词，不影响线索推进。</p>
+        <p>若点击无响应，则表示该信息无关，无需使用 F12 查看源码。</p>
+        <p style="margin-top:6px; font-size:11px; color:#5a6a7a;">22:40 后请勿在走廊停留。</p>
+    </div>
+
+    <!-- Dock -->
+    <div class="dock">
+        <a href="pages/student.html" target="_blank" class="dock-link"><div class="dock-icon">👤</div></a>
+        <a href="pages/forum.html" target="_blank" class="dock-link"><div class="dock-icon">🗨️</div></a>
+        <a href="pages/locker.html" target="_blank" class="dock-link"><div class="dock-icon">🔒</div></a>
+        <a href="pages/news.html" target="_blank" class="dock-link"><div class="dock-icon">📰</div></a>
+    </div>
+
+    <div class="progress">1/12</div>
+
+    <script>
+        // ═══════════════════════════════════════
+        // 关键词库：关键词 (key) → 页面文件 (value)
+        // 在这里添加/修改关键词与页面的对应关系
+        // ═══════════════════════════════════════
+        const FILE_DATABASE = {
+            "姜": {
+                file: "pages/student.html",
+                label: "学生档案_姜（高二3班）",
+                type: "文档", icon: "👤", color: "#3d6a8f"
+            },
+            "陈": {
+                file: "pages/student.html",
+                label: "学生档案_陈（高二3班）",
+                type: "文档", icon: "👤", color: "#3d6a8f"
+            },
+            "葛": {
+                file: "pages/student.html",
+                label: "学生档案_葛（高二3班）",
+                type: "文档", icon: "👤", color: "#3d6a8f"
+            },
+            "于": {
+                file: "pages/student.html",
+                label: "学生档案_于（高二3班）",
+                type: "文档", icon: "👤", color: "#3d6a8f"
+            },
+            "李志胜": {
+                file: "pages/student.html",
+                label: "教师档案_李志胜（级部主任）",
+                type: "文档", icon: "📛", color: "#8f3d3d"
+            },
+            "邢波": {
+                file: "pages/student.html",
+                label: "教师档案_邢波（级部副主任）",
+                type: "文档", icon: "📛", color: "#8f3d3d"
+            },
+            "任党林": {
+                file: "pages/student.html",
+                label: "教师档案_任党林（副校长）",
+                type: "文档", icon: "📛", color: "#8f3d3d"
+            },
+            "王晓": {
+                file: "pages/student.html",
+                label: "教师档案_王晓（历史老师）",
+                type: "文档", icon: "📛", color: "#8f3d3d"
+            },
+            "寇润平": {
+                file: "pages/student.html",
+                label: "教师档案_寇润平（校长）",
+                type: "文档", icon: "📛", color: "#8f3d3d"
+            },
+            "扣分": {
+                file: "pages/grades.html",
+                label: "违纪扣分登记表（2025-2026上）",
+                type: "文档", icon: "📋", color: "#3d6a55"
+            },
+            "常规": {
+                file: "pages/grades.html",
+                label: "《常规》抄写记录汇总",
+                type: "文档", icon: "📋", color: "#3d6a55"
+            },
+            "失物招领": {
+                file: "pages/locker.html",
+                label: "德育处·失物招领登记",
+                type: "系统", icon: "🔒", color: "#8f6a3d"
+            },
+            "挂件": {
+                file: "pages/locker.html",
+                label: "德育处·失物招领登记",
+                type: "系统", icon: "🔒", color: "#8f6a3d"
+            },
+            "校园墙": {
+                file: "pages/forum.html",
+                label: "蓬莱一中·校园墙（匿名留言板）",
+                type: "网页", icon: "🗨️", color: "#4a90d9"
+            },
+            "论坛": {
+                file: "pages/forum.html",
+                label: "蓬莱一中·校园墙（匿名留言板）",
+                type: "网页", icon: "🗨️", color: "#4a90d9"
+            },
+            "校史": {
+                file: "pages/news.html",
+                label: "蓬莱一中建校60周年·校史特刊",
+                type: "文档", icon: "📰", color: "#8a7a55"
+            },
+            "校报": {
+                file: "pages/news.html",
+                label: "蓬莱一中校报（2025年12月）",
+                type: "文档", icon: "📰", color: "#8a7a55"
+            },
+            "1998": {
+                file: "pages/news.html",
+                label: "蓬莱一中建校60周年·校史特刊",
+                type: "文档", icon: "📰", color: "#8a7a55"
+            },
+            "值班": {
+                file: "pages/audit.html",
+                label: "德育处·值班与巡查日志",
+                type: "文档", icon: "📓", color: "#5a4a8f"
+            },
+            "查宿舍": {
+                file: "pages/audit.html",
+                label: "德育处·值班与巡查日志",
+                type: "文档", icon: "📓", color: "#5a4a8f"
+            },
+            "公告": {
+                file: "pages/notice.html",
+                label: "校园公告栏（12月）",
+                type: "网页", icon: "📢", color: "#8f6a3d"
+            },
+            "校历": {
+                file: "pages/calendar.html",
+                label: "2025-2026学年校历·查宿排班",
+                type: "文档", icon: "📅", color: "#6a4a8f"
+            }
+        };
+
+        function searchDesktop() {
+            const input = document.getElementById('search-input');
+            const resultsDiv = document.getElementById('search-results');
+            const query = input.value.trim().toLowerCase();
+            resultsDiv.innerHTML = '';
+
+            if (query.length === 0) { resultsDiv.style.display = 'none'; return; }
+
+            // 核心搜索逻辑：精确匹配关键词
+            let found = false;
+            for (const keyword in FILE_DATABASE) {
+                if (keyword.toLowerCase().trim() === query) {
+                    const data = FILE_DATABASE[keyword];
+                    found = true;
+                    const item = document.createElement('a');
+                    item.className = 'result-item';
+                    item.href = data.file;
+                    item.target = '_blank';
+                    item.innerHTML = `
+                        <div class="result-icon" style="background-color: ${data.color};">${data.icon}</div>
+                        <div style="flex-grow:1">
+                            <div class="result-label">${data.label}</div>
+                            <div class="result-detail">${data.type}文件</div>
+                        </div>`;
+                    resultsDiv.appendChild(item);
+                }
+            }
+
+            resultsDiv.style.display = 'block';
+            if (!found) {
+                resultsDiv.innerHTML = '<div style="padding: 10px 16px; color: #7a8896;">未找到匹配结果</div>';
+            }
+        }
+
+        function hideResults() {
+            document.getElementById('search-results').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

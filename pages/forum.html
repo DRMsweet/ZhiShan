@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>校园墙</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+        body { background: #232d3b; padding: 30px 20px 60px; }
+        .topbar { max-width: 780px; margin: 0 auto 20px; display: flex; align-items: center; gap: 12px; }
+        .progress { background: #3d4f63; color: #dfe6ec; padding: 4px 12px; border-radius: 999px; font-size: 12px; font-family: monospace; }
+        .back { color: #8a97a5; text-decoration: none; font-size: 13px; }
+        .back:hover { color: #aebccb; }
+
+        .forum {
+            max-width: 780px; margin: 0 auto; background: #f7f5ee;
+            border-radius: 14px; box-shadow: 0 10px 28px rgba(0,0,0,0.35); overflow: hidden;
+        }
+        .forum-header { background: #1a2332; color: #dfe6ec; padding: 14px 22px; font-size: 16px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+        .forum-header .login-state { font-size: 12px; font-weight: 400; opacity: 0.8; }
+        .board-list { padding: 10px 0; }
+        .post { display: flex; align-items: center; padding: 13px 22px; border-bottom: 1px solid #ece8dc; cursor: pointer; transition: background 0.1s; }
+        .post:hover { background: #eef1f5; }
+        .post .title { font-size: 14px; color: #3e3e3e; flex-grow: 1; }
+        .post .author { font-size: 12px; color: #a09880; margin-right: 16px; }
+        .post .reply { font-size: 12px; color: #a09880; }
+        .post.locked { opacity: 0.55; cursor: not-allowed; }
+        .post.locked .title::after { content: " 🔒"; font-size: 12px; }
+        .post.hidden { display: none; }
+        .post.revealed { background: #f5ecd0; border-left: 4px solid #c9a227; cursor: pointer; }
+        .post.revealed:hover { background: #efe2b8; }
+
+        /* 登录弹层 */
+        .login-overlay {
+            display: none; position: fixed; inset: 0; background: rgba(10,14,20,0.7);
+            justify-content: center; align-items: center; z-index: 100;
+        }
+        .login-box {
+            width: 360px; background: #f7f5ee; border-radius: 14px; padding: 28px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        .login-box h3 { font-size: 17px; color: #1a2332; margin-bottom: 18px; text-align: center; }
+        .login-box label { font-size: 13px; color: #8a8578; display: block; margin: 10px 0 4px; }
+        .login-box input {
+            width: 100%; padding: 10px 14px; border: 1.5px solid #d8d2c0; border-radius: 8px;
+            font-size: 14px; outline: none; background: #fff;
+        }
+        .login-box input:focus { border-color: #2c3e50; }
+        .login-btn {
+            width: 100%; margin-top: 18px; padding: 11px; background: #2c3e50; color: #dfe6ec;
+            border: none; border-radius: 8px; font-size: 15px; cursor: pointer;
+        }
+        .login-btn:hover { background: #1a2332; }
+        .login-msg { font-size: 13px; margin-top: 10px; text-align: center; min-height: 18px; }
+        .login-msg.error { color: #8f3d3d; }
+        .login-msg.ok { color: #2c6e3d; }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <span class="progress">8/12</span>
+        <a class="back" href="../desk.html">← 返回终端</a>
+    </div>
+
+    <div class="forum">
+        <div class="forum-header">
+            <span>🗨️ 蓬莱一中 · 校园墙（匿名留言板）</span>
+            <span class="login-state" id="loginState">未登录</span>
+        </div>
+        <div class="board-list">
+            <div class="post" onclick="openPost('p1')">
+                <span class="title">【求助】常规到底怎么抄才不会被退回重抄啊</span>
+                <span class="author">匿名</span>
+                <span class="reply">34回复</span>
+            </div>
+            <div class="post" onclick="openPost('p2')">
+                <span class="title">【吐槽】任校的大脑分区理论又升级了，这次说跑步能激活英语区</span>
+                <span class="author">匿名</span>
+                <span class="reply">87回复</span>
+            </div>
+            <div class="post" onclick="openPost('p3')">
+                <span class="title">【询问】B栋三层夜里真的有人听到脚步声吗？</span>
+                <span class="author">匿名</span>
+                <span class="reply">56回复</span>
+            </div>
+            <div class="post locked" id="hiddenPost" onclick="tryLogin()">
+                <span class="title">【归档区】2018届管理员留档：被学校"收走"的那些人</span>
+                <span class="author">仅管理员</span>
+                <span class="reply">—</span>
+            </div>
+            <div class="post hidden revealed" id="secretPost" onclick="openSecret()">
+                <span class="title">📂 【归档区·2018】这所学校在"收"东西 —— 阅读 →</span>
+                <span class="author">管理员</span>
+                <span class="reply">查看 →</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 登录弹层 -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-box">
+            <h3>归档区 · 管理员口令验证</h3>
+            <label>账号</label>
+            <input type="text" id="loginUser" placeholder="（见公告）">
+            <label>口令</label>
+            <input type="password" id="loginPwd" placeholder="口令" onkeydown="if(event.key==='Enter') doLogin()">
+            <button class="login-btn" onclick="doLogin()">验 证</button>
+            <div class="login-msg" id="loginMsg"></div>
+        </div>
+    </div>
+
+    <script>
+        // ═══════════════════════════════════════
+        // 密码门 2：校园墙归档区
+        // 线索：账号 jiushi ← notice.html 公告（系统维护通知）
+        //      口令 19980601 ← locker.html 挂件背面刻痕
+        //      （1998.6.1 = 旧教学楼封闭日，见 news.html 校史）
+        // ═══════════════════════════════════════
+        const CORRECT_USER = "jiushi";
+        const CORRECT_PASS = "19980601";
+
+        function tryLogin() {
+            document.getElementById('loginOverlay').style.display = 'flex';
+            document.getElementById('loginUser').focus();
+        }
+
+        function doLogin() {
+            const user = document.getElementById('loginUser').value.trim();
+            const pass = document.getElementById('loginPwd').value.trim();
+            const msg = document.getElementById('loginMsg');
+            if (user === CORRECT_USER && pass === CORRECT_PASS) {
+                msg.className = 'login-msg ok';
+                msg.textContent = '验证成功，正在加载归档区...';
+                setTimeout(() => {
+                    document.getElementById('loginOverlay').style.display = 'none';
+                    document.getElementById('loginState').textContent = '管理员：jiushi';
+                    document.getElementById('hiddenPost').style.display = 'none';
+                    document.getElementById('secretPost').style.display = 'flex';
+                }, 600);
+            } else {
+                msg.className = 'login-msg error';
+                msg.textContent = '账号或口令错误，请重试！';
+                document.getElementById('loginPwd').value = '';
+            }
+        }
+
+        function openPost(id) {
+            alert('该帖子与当前调查无关。');
+        }
+
+        function openSecret() {
+            window.location.href = 'news.html';
+        }
+    </script>
+</body>
+</html>

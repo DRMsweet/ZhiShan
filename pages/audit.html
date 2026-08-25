@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>值班日志</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+        body { background: #232d3b; padding: 30px 20px 60px; }
+        .topbar { max-width: 820px; margin: 0 auto 20px; display: flex; align-items: center; gap: 12px; }
+        .progress { background: #3d4f63; color: #dfe6ec; padding: 4px 12px; border-radius: 999px; font-size: 12px; font-family: monospace; }
+        .back { color: #8a97a5; text-decoration: none; font-size: 13px; }
+        .back:hover { color: #aebccb; }
+        .doc {
+            max-width: 820px; margin: 0 auto; background: #f7f5ee;
+            border-radius: 6px; padding: 38px 48px;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+            font-family: "Songti SC", "SimSun", serif;
+        }
+        .doc-title { text-align: center; font-size: 19px; font-weight: 700; color: #1a2332; margin-bottom: 6px; }
+        .doc-sub { text-align: center; font-size: 13px; color: #8a8578; margin-bottom: 24px; border-bottom: 1px solid #e4dfd0; padding-bottom: 14px; }
+        .log-entry { border-bottom: 1px dashed #e4dfd0; padding: 14px 0; }
+        .log-entry .when { font-size: 12.5px; color: #8a8578; margin-bottom: 4px; font-family: monospace; }
+        .log-entry p { font-size: 14px; line-height: 1.9; color: #4a4438; }
+        .log-entry .sig { font-size: 12px; color: #a09880; text-align: right; margin-top: 4px; }
+        .log-entry .red { color: #8f3d3d; font-weight: 600; }
+        .log-entry.dark { background: #ece8dc; border-radius: 8px; padding: 14px 18px; }
+        .extra-note { background: #e8ecf1; border-left: 4px solid #4a90d9; padding: 14px 18px; margin-top: 18px; font-size: 13.5px; line-height: 1.9; color: #3e3e3e; }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <span class="progress">10(extra)/12</span>
+        <a class="back" href="../desk.html">← 返回终端</a>
+    </div>
+
+    <div class="doc">
+        <div class="doc-title">德育处 · 值班与巡查日志</div>
+        <div class="doc-sub">2025 年 12 月 · 密级：内部 · 仅限行政人员查阅</div>
+
+        <div class="log-entry">
+            <div class="when">2025.12.22 22:40 · B栋三层 · 值班人：李志胜</div>
+            <p>22:10-22:30 例行查宿，无异常。22:35 返回三层值班室途中，听到走廊东侧有<b>脚步声</b>，
+            节奏缓慢，不似学生奔跑。开灯查看，走廊空无一人。<span class="red">（该现象本周已记录 3 次）</span></p>
+            <div class="sig">李志胜 签：未见异常，注意观察。</div>
+        </div>
+
+        <div class="log-entry">
+            <div class="when">2025.12.19 15:30 · 操场 · 动员大会会议记录</div>
+            <p>任党林副校长讲话约 40 分钟，主题"学习效率与身体锻炼"，提出"大脑分区"理论，
+            并强调"感冒是因为没跑起来，跑起来就不冷"。讲话结束后，李志胜主任上台补充，
+            批评学生"不尊重任校长"，会场出现<b>嘘声</b>。李志胜主任情绪激动，
+            当场宣布下周起加大走廊巡查力度。任党林副校长全程在场，未作表态。</p>
+            <div class="sig">记录人：邢波</div>
+        </div>
+
+        <div class="log-entry">
+            <div class="when">2025.12.15-12.19 · 教学区 · 课间巡查记录（李志胜）</div>
+            <p>本周上课时间巡查 21 次，覆盖全部班级后门观察点。重点记录：各班"常规抄写进度"、
+            趴在桌上人数、后排学生出勤情况。巡查路线固定：三层→二层→一层，每班后门停留约 1 分钟。
+            <span class="red">备注：巡查时请勿与学生对视，避免影响课堂。</span></p>
+            <div class="sig">李志胜 签</div>
+        </div>
+
+        <div class="log-entry dark">
+            <div class="when">2025.12.17 14:20 · 高二（4）班 · 历史课课堂记录（王晓）</div>
+            <p>课堂进行至第 25 分钟，任课教师王晓突然提高音量<b>吼声持续约 40 秒</b>，整条楼道可闻。
+            吼声结束后，王晓老师恢复正常音量继续授课，甩头动作较往日频繁。学生反映：
+            吼声响起时，教室后窗玻璃有轻微震动。<span class="red">（本月第 4 次同类记录）</span></p>
+            <div class="sig">值日教师 签：建议关注教师状态。</div>
+        </div>
+
+        <div class="log-entry">
+            <div class="when">2025.12.20 · 级部 · 《常规》上交登记核查</div>
+            <p>本周共收常规抄写本 37 本，对应扣分名单 31 人。<b>多出 6 本</b>，落款均为
+            已"转学/休学"学生姓名，字迹与前几周所交样本一致。<span class="red">名单核对：转学学生仍在交本。</span></p>
+            <div class="sig">邢波 签：已上报寇校长。</div>
+        </div>
+
+        <div class="extra-note">
+            🕯 值班室抽屉里的便条（字迹潦草，未署名）：<br>
+            "查宿的脚步声有三种：皮鞋、布鞋、咳嗽声。<br>
+            第四种没有鞋。它只停在被扣过分的门口。<br>
+            别问它是怎么知道门牌号的——<b>常规的落款，就是它的点名册。</b>"
+        </div>
+    </div>
+</body>
+</html>

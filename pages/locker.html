@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>失物招领柜</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+        body { background: #232d3b; padding: 30px 20px 60px; }
+        .topbar { max-width: 500px; margin: 0 auto 20px; display: flex; align-items: center; gap: 12px; }
+        .progress { background: #3d4f63; color: #dfe6ec; padding: 4px 12px; border-radius: 999px; font-size: 12px; font-family: monospace; }
+        .back { color: #8a97a5; text-decoration: none; font-size: 13px; }
+        .back:hover { color: #aebccb; }
+        .panel {
+            max-width: 500px; margin: 0 auto; background: #f7f5ee;
+            border-radius: 14px; padding: 34px; text-align: center;
+            box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+        }
+        .locker-icon { font-size: 60px; margin-bottom: 12px; }
+        h2 { color: #1a2332; font-size: 18px; margin-bottom: 8px; }
+        .sub { font-size: 13px; color: #8a8578; margin-bottom: 22px; }
+        .pwd-input {
+            width: 200px; padding: 12px 16px; font-size: 22px; letter-spacing: 8px;
+            text-align: center; border: 2px solid #d8d2c0; border-radius: 10px;
+            outline: none; font-family: monospace; background: #fff;
+        }
+        .pwd-input:focus { border-color: #2c3e50; }
+        .btn {
+            display: block; margin: 18px auto 0; padding: 10px 40px;
+            background: #2c3e50; color: #dfe6ec; border: none; border-radius: 999px;
+            font-size: 15px; cursor: pointer; transition: background 0.15s;
+        }
+        .btn:hover { background: #1a2332; }
+        .error { color: #8f3d3d; font-size: 13px; margin-top: 12px; min-height: 18px; }
+        /* 打开后的内容 */
+        .cabinet { display: none; text-align: left; margin-top: 20px; border-top: 2px dashed #e4dfd0; padding-top: 20px; }
+        .item-row { display: flex; align-items: center; gap: 14px; padding: 14px 16px; background: #ece8dc; border-radius: 10px; margin-bottom: 10px; cursor: pointer; transition: background 0.15s; }
+        .item-row:hover { background: #e3ecf5; }
+        .item-row .ico { font-size: 30px; }
+        .item-row .name { font-size: 14px; font-weight: 600; color: #1a2332; }
+        .item-row .desc { font-size: 12px; color: #8a8578; margin-top: 2px; }
+        .charm { display: none; margin-top: 16px; background: #f5ecd0; border: 1px dashed #c9a227; border-radius: 10px; padding: 16px 18px; font-size: 13.5px; color: #5a4f35; line-height: 1.9; text-align: left; }
+        .charm b { color: #8f3d3d; }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <span class="progress">7/12</span>
+        <a class="back" href="../desk.html">← 返回终端</a>
+    </div>
+
+    <div class="panel" id="lockPanel">
+        <div class="locker-icon">🔒</div>
+        <h2>德育处 · 失物招领柜</h2>
+        <div class="sub">柜号 D-07 · 请输入 4 位密码（本校惯例：学号后四位）</div>
+        <input type="password" id="pwd" class="pwd-input" maxlength="4" inputmode="numeric" onkeydown="if(event.key==='Enter') tryUnlock()">
+        <button class="btn" onclick="tryUnlock()">开 柜</button>
+        <div class="error" id="err"></div>
+
+        <!-- 打开后的内容（初始隐藏） -->
+        <div class="cabinet" id="cabinet">
+            <h3 style="color:#2c3e50;">✅ 柜门已打开 —— 近日没收物品：</h3>
+            <div style="margin-top:12px;">
+                <div class="item-row" onclick="showCharm()">
+                    <div class="ico">⛩️</div>
+                    <div>
+                        <div class="name">挂件 ×2（红白巫女 & 黑帽魔法使）</div>
+                        <div class="desc">标签：高二3班·于（2025.12.19 没收）</div>
+                    </div>
+                </div>
+                <div class="item-row">
+                    <div class="ico">📕</div>
+                    <div>
+                        <div class="name">小说 ×3 / 充电宝 ×2</div>
+                        <div class="desc">与本案无关</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="charm" id="charm">
+                <strong>⛩️ 博丽灵梦 & 雾雨魔理沙 挂件（背面）</strong><br>
+                金属背面有极浅的刻痕，像是被人用钥匙尖反复划过：<br>
+                <b>"19980601"</b><br>
+                <b>"jiushi"</b><br>
+                下面还有一行更小的字：<b>"去归档区。别回头。"</b><br>
+                <br>
+                <span style="font-size:12px; color:#8a8578;">——于说这不是她刻的。她买来的时候，背面是光的。</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ═══════════════════════════════════════
+        // 密码门：失物招领柜
+        // 线索：群聊说"柜子密码是惯例，学号后四位"
+        //      于的学号 20240128 → 后四位 0128（见 student.html 学生档案）
+        // ═══════════════════════════════════════
+        const CORRECT_PWD = "0128";
+
+        function tryUnlock() {
+            const input = document.getElementById('pwd').value.trim();
+            const err = document.getElementById('err');
+            if (input === CORRECT_PWD) {
+                document.querySelector('.pwd-input').style.display = 'none';
+                document.querySelector('.btn').style.display = 'none';
+                document.querySelector('.sub').textContent = '柜门已打开';
+                document.getElementById('cabinet').style.display = 'block';
+                err.textContent = '';
+            } else {
+                err.textContent = '密码错误，请重试！';
+                document.getElementById('pwd').value = '';
+                document.getElementById('pwd').focus();
+            }
+        }
+
+        function showCharm() {
+            document.getElementById('charm').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

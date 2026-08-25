@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>至善中学网页解密</title>
+    <style>
+        :root {
+            --text-main: #2c2c2c;
+            --ink: #1a2332;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(160deg, #1a2332 0%, #2c3e50 45%, #3d4f63 100%);
+            color: var(--text-main);
+            overflow: hidden;
+        }
+        .container {
+            width: 720px;
+            background: rgba(250, 248, 242, 0.96);
+            border-radius: 18px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.7);
+            padding: 46px 54px;
+            animation: fadeIn 1.2s ease forwards;
+            opacity: 0;
+        }
+        @keyframes fadeIn { to { opacity: 1; } }
+        h1 { font-size: 28px; font-weight: 600; margin-bottom: 22px; color: #1a2332; }
+        p { font-size: 15.5px; line-height: 2.0; margin-bottom: 16px; color: #3e3e3e; }
+        .badge {
+            display: inline-block;
+            background: #3d4f63; color: #e8e4d8;
+            font-size: 12px; padding: 3px 12px; border-radius: 999px;
+            margin-bottom: 18px;
+        }
+        .btn-wrap { margin-top: 32px; text-align: center; }
+        .enter-btn {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 12px 46px; font-size: 16px; font-weight: 500;
+            color: #fff;
+            background: linear-gradient(to bottom, #44566b, #2c3e50);
+            border: none; border-radius: 999px; cursor: pointer;
+            box-shadow: 0 4px 12px rgba(26,35,50,0.5);
+            transition: all 0.15s ease;
+        }
+        .enter-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(26,35,50,0.6); }
+        .enter-btn:active { transform: translateY(1px); }
+        .hint { margin-top: 24px; text-align: center; font-size: 13px; color: #8a8578; }
+        .ghost { color: #7a8896; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <span class="badge">蓬莱一中 · 校园解密</span>
+        <h1>夜晚的脚步声</h1>
+
+        <p>你是<strong>姜</strong>，蓬莱一中高二（3）班学生。</p>
+
+        <p>上周三晚上，你回宿舍的路上没跑起来，被级部主任<strong>李志胜</strong>堵在了路上。</p>
+
+        <p>"回宿舍的路上必须跑起来，节省时间，这是规定。为什么不跑？"<br>
+        "……我累了。"<br>
+        李志胜盯着你看了很久，说："<strong>累了就回家。</strong>"</p>
+
+        <p>于是你被赶回家，反思了一个星期。</p>
+
+        <p>这周一，你回到学校。宿舍楼、教室、食堂，一切看起来都和走的时候一样。<br>
+        可你总觉得哪里不对——<br>
+        同学们的眼神、走廊里的风、<strong>夜里宿舍门外越来越近的脚步声</strong>……</p>
+
+        <p>陈见到你的第一句话是："你不在的这一个星期，<strong>出事了</strong>。"</p>
+
+        <p>🔔<em class="ghost">第一步，不妨试试在电脑里搜【你自己的名字】，祝你好运。</em></p>
+
+        <div class="btn-wrap">
+            <button class="enter-btn" id="enterBtn">
+                🔦 进入教学楼
+            </button>
+        </div>
+
+        <div class="hint">蓬莱一中 · 学生管理系统 · 22:40 后请勿在走廊停留</div>
+    </div>
+
+    <script>
+        document.getElementById('enterBtn').addEventListener('click', () => {
+            window.location.href = 'desk.html';
+        });
+    </script>
+</body>
+</html>

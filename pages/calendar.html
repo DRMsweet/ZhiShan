@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>校历·查宿排班</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+        body { background: #232d3b; padding: 30px 20px 60px; }
+        .topbar { max-width: 740px; margin: 0 auto 20px; display: flex; align-items: center; gap: 12px; }
+        .progress { background: #3d4f63; color: #dfe6ec; padding: 4px 12px; border-radius: 999px; font-size: 12px; font-family: monospace; }
+        .back { color: #8a97a5; text-decoration: none; font-size: 13px; }
+        .back:hover { color: #aebccb; }
+        .card {
+            max-width: 740px; margin: 0 auto 16px; background: #f7f5ee;
+            border-radius: 14px; padding: 26px 32px;
+            box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+        }
+        h2 { color: #1a2332; margin-bottom: 18px; font-size: 19px; }
+        .month { margin-bottom: 18px; }
+        .month h3 { font-size: 15px; color: #5a4f35; margin-bottom: 10px; border-bottom: 2px solid #ece8dc; padding-bottom: 6px; }
+        .event { display: flex; align-items: center; gap: 12px; padding: 7px 10px; border-radius: 8px; font-size: 14px; color: #3e3e3e; }
+        .event .date { font-family: monospace; color: #8a8578; width: 88px; flex-shrink: 0; }
+        .event .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+        .event.hl { background: #f5ecd0; border: 1px dashed #c9a227; }
+        .event.hl .date { color: #8f6a1a; font-weight: 700; }
+        .event.dark { background: #ece8dc; }
+        .legend { margin-top: 12px; font-size: 12px; color: #a09880; border-top: 1px solid #ece8dc; padding-top: 12px; line-height: 1.9; }
+        .duty-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+        .duty-table th, .duty-table td { border: 1px solid #e4dfd0; padding: 9px 10px; font-size: 13.5px; text-align: center; color: #3e3e3e; }
+        .duty-table th { background: #ece8dc; color: #1a2332; }
+        .duty-table .night { background: #f5e3e3; color: #8f3d3d; font-weight: 600; }
+        .duty-note { background: #e8ecf1; border-left: 4px solid #4a90d9; padding: 11px 15px; border-radius: 0 8px 8px 0; font-size: 13px; color: #3e3e3e; margin-top: 14px; line-height: 1.8; }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <span class="progress">5/12</span>
+        <a class="back" href="../desk.html">← 返回终端</a>
+    </div>
+
+    <div class="card">
+        <h2>📅 2025-2026 学年第一学期校历（12月）</h2>
+
+        <div class="month">
+            <h3>12月</h3>
+            <div class="event"><span class="dot" style="background:#8f3d3d;"></span><span class="date">12月16日</span> 姜同学违纪通报，回家反思一周</div>
+            <div class="event"><span class="dot" style="background:#8f3d3d;"></span><span class="date">12月18日</span> 陈同学宿舍跳床，被王晓老师记录扣分</div>
+            <div class="event"><span class="dot" style="background:#8f3d3d;"></span><span class="date">12月19日</span> 于同学挂件被没收；校园墙系统升级</div>
+            <div class="event"><span class="dot" style="background:#8f3d3d;"></span><span class="date">12月20日</span> 旧教学楼旧址例行"安全巡查"（封闭区域）</div>
+            <div class="event hl"><span class="dot" style="background:#c9a227;"></span><span class="date">12月22日</span> 姜返校；晚自习后宿舍楼例行查宿</div>
+            <div class="event hl"><span class="dot" style="background:#c9a227;"></span><span class="date">12月24日</span> 操场动员大会（任党林讲话）</div>
+            <div class="event"><span class="dot" style="background:#8f3d3d;"></span><span class="date">12月26日</span> 常规抄写本最后上交期限</div>
+            <div class="event"><span class="dot" style="background:#8f3d3d;"></span><span class="date">12月30日</span> 元旦汇演彩排（操场）</div>
+        </div>
+
+        <div class="legend">
+            🔴 已发生 &nbsp;|&nbsp; 🟡 本周重点 &nbsp;|&nbsp; 注：12.20 旧教学楼旧址巡查为每学期例行，由寇润平校长亲自带队。
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🌙 宿舍楼查宿排班表（12月第4周）</h2>
+        <table class="duty-table">
+            <tr><th>日期</th><th>查宿老师</th><th>查宿时间</th><th>备注</th></tr>
+            <tr><td>周一 12.22</td><td>李志胜</td><td>22:10-22:30</td><td>重点查熄灯后滞留走廊</td></tr>
+            <tr><td>周二 12.23</td><td>邢波</td><td>22:10-22:30</td><td>重点查床上违规物品</td></tr>
+            <tr><td>周三 12.24</td><td>任党林</td><td>22:10-22:30</td><td>动员大会当日，查纪律</td></tr>
+            <tr><td>周四 12.25</td><td>王晓</td><td>22:10-22:30</td><td>重点查楼道喧哗</td></tr>
+            <tr><td>周五 12.26</td><td class="night">寇润平</td><td class="night">22:10-22:30</td><td class="night">校长亲自查宿</td></tr>
+        </table>
+        <div class="duty-note">
+            🕯 同学间流传的"查宿口诀"：<br>
+            李志胜的脚步声是皮鞋，邢波是布鞋，任党林没有脚步声，王晓会咳嗽。<br>
+            可 22:30 查宿结束后——走廊里偶尔还会有第四个脚步声。<b>那个脚步声，不穿鞋。</b>
+        </div>
+    </div>
+</body>
+</html>

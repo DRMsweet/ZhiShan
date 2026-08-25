@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>扣分登记表</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+        body { background: #232d3b; padding: 30px 20px 60px; }
+        .topbar { max-width: 880px; margin: 0 auto 20px; display: flex; align-items: center; gap: 12px; }
+        .progress { background: #3d4f63; color: #dfe6ec; padding: 4px 12px; border-radius: 999px; font-size: 12px; font-family: monospace; }
+        .back { color: #8a97a5; text-decoration: none; font-size: 13px; }
+        .back:hover { color: #aebccb; }
+        .excel {
+            max-width: 880px; margin: 0 auto; background: #f7f5ee;
+            border-radius: 10px; box-shadow: 0 10px 28px rgba(0,0,0,0.35); overflow: hidden;
+        }
+        .excel-bar { background: #2c3e50; color: #dfe6ec; padding: 10px 18px; font-size: 14px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+        .excel-bar .func { font-weight: 400; font-size: 12px; opacity: 0.75; }
+        .sheet-tabs { display: flex; background: #ece8dc; border-bottom: 1px solid #d8d2c0; }
+        .sheet-tab { padding: 8px 18px; font-size: 13px; color: #8a8578; cursor: pointer; border-right: 1px solid #d8d2c0; }
+        .sheet-tab.active { background: #f7f5ee; color: #2c3e50; font-weight: 600; border-top: 2px solid #2c3e50; }
+        table.spreadsheet { width: 100%; border-collapse: collapse; font-size: 13px; }
+        table.spreadsheet th, table.spreadsheet td { border: 1px solid #e4dfd0; padding: 8px 10px; text-align: center; color: #3e3e3e; }
+        table.spreadsheet th { background: #ece8dc; font-weight: 600; color: #1a2332; }
+        .abnormal td { background: #f5e3e3 !important; color: #8f3d3d; font-weight: 600; }
+        .me td { background: #e3ecf5 !important; }
+        .footnote { padding: 12px 16px; font-size: 12.5px; color: #8a8578; border-top: 1px solid #ece8dc; line-height: 1.8; }
+        .footnote .red { color: #8f3d3d; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <span class="progress">6/12</span>
+        <a class="back" href="../desk.html">← 返回终端</a>
+    </div>
+
+    <div class="excel">
+        <div class="excel-bar">📋 2025-2026学年第一学期 违纪扣分登记表.xlsx <span class="func">— Excel · 级部专用</span></div>
+        <div class="sheet-tabs">
+            <div class="sheet-tab active">扣分登记（12月）</div>
+            <div class="sheet-tab">常规上交</div>
+            <div class="sheet-tab">备注</div>
+        </div>
+        <table class="spreadsheet">
+            <tr><th>日期</th><th>姓名</th><th>班级</th><th>违纪事项</th><th>扣分</th><th>记录人</th><th>常规抄写</th></tr>
+            <tr class="me"><td>12.16</td><td>姜</td><td>高二3班</td><td>回宿舍路上未按要求跑步，态度消极</td><td>3</td><td>李志胜</td><td>待交</td></tr>
+            <tr class="abnormal"><td>12.15</td><td>孙某</td><td>高二4班</td><td>厕所内反锁滞留（多次）</td><td>5</td><td>李志胜</td><td>已交5份</td></tr>
+            <tr><td>12.18</td><td>陈</td><td>高二3班</td><td>宿舍内从床上跳下</td><td>2</td><td>王晓</td><td>抄写中</td></tr>
+            <tr><td>12.19</td><td>于</td><td>高二3班</td><td>午休床上违规物品</td><td>2</td><td>邢波</td><td>抄写中</td></tr>
+            <tr class="abnormal"><td>12.14</td><td>刘某</td><td>高三2班</td><td>早自习趴桌睡觉（多次）</td><td>3</td><td>任党林</td><td>已交3份</td></tr>
+            <tr class="abnormal"><td>12.10</td><td>赵某</td><td>高三5班</td><td>熄灯后滞留走廊</td><td>3</td><td>李志胜</td><td>已交3份</td></tr>
+            <tr><td>12.08</td><td>葛</td><td>高二3班</td><td>课间未按规定路线行走</td><td>1</td><td>邢波</td><td>已交1份</td></tr>
+        </table>
+        <div class="footnote">
+            ⚠️ 数据异常提示：<br>
+            · 孙某（12.15 记 5 分）与刘某（12.14 记 3 分）、赵某（12.10 记 3 分）均于本周内<b>办理转学/休学</b>，家长未提出异议，手续当日办结。<br>
+            · 本表"常规抄写"栏由级部统一登记，<span class="red">落款名字的数量，似乎比本表人数多</span>（见《常规上交》表）。<br>
+            · 表尾签字：<span class="red">李志胜 · 2025.12.20</span>
+        </div>
+    </div>
+</body>
+</html>

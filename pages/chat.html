@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>班级群聊</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+        body { background: #232d3b; padding: 30px 20px 60px; }
+        .topbar { max-width: 640px; margin: 0 auto 20px; display: flex; align-items: center; gap: 12px; }
+        .progress { background: #3d4f63; color: #dfe6ec; padding: 4px 12px; border-radius: 999px; font-size: 12px; font-family: monospace; }
+        .back { color: #8a97a5; text-decoration: none; font-size: 13px; }
+        .back:hover { color: #aebccb; }
+        .phone {
+            max-width: 640px; margin: 0 auto; background: #f7f5ee;
+            border-radius: 16px; box-shadow: 0 10px 28px rgba(0,0,0,0.35); overflow: hidden;
+        }
+        .chat-header { background: #2c3e50; color: #dfe6ec; padding: 14px 20px; font-size: 15px; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+        .chat-body { padding: 18px 16px; background: #f0ede2; min-height: 420px; }
+        .msg { display: flex; margin-bottom: 14px; }
+        .msg .bubble { max-width: 80%; padding: 10px 14px; border-radius: 12px; font-size: 14px; line-height: 1.65; color: #3e3e3e; }
+        .msg.other .bubble { background: #fff; border-top-left-radius: 4px; }
+        .msg.self { flex-direction: row-reverse; }
+        .msg.self .bubble { background: #c9d8e5; border-top-right-radius: 4px; }
+        .msg .time { font-size: 11px; color: #b0a890; margin-top: 4px; }
+        .msg.self .time { text-align: right; }
+        .highlight .bubble { background: #f5ecd0 !important; border: 1px dashed #c9a227; }
+        .sys { text-align: center; font-size: 12px; color: #a09880; margin: 16px 0; }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <span class="progress">3/12</span>
+        <a class="back" href="../desk.html">← 返回终端</a>
+    </div>
+
+    <div class="phone">
+        <div class="chat-header">💬 高二3班 · 班级群（45人）</div>
+        <div class="chat-body">
+
+            <div class="sys">—— 12月22日 周一 07:50 ——</div>
+
+            <div class="msg other"><div><div class="bubble">姜回来了！！</div><div class="time">07:52</div></div></div>
+            <div class="msg self"><div><div class="bubble">嗯，回来了。</div><div class="time">07:53</div></div></div>
+            <div class="msg other"><div><div class="bubble">你不在的这一周，真的出事了。</div><div class="time">07:54</div></div></div>
+
+            <div class="msg other"><div><div class="bubble">先是陈隔壁班那个谁——就是老把厕所拉满还反锁的那位，上周被扣了 5 分，然后……转学了。家长来办的手续，特别急。</div><div class="time">07:55</div></div></div>
+            <div class="msg other"><div><div class="bubble">他走之后，那个厕所隔间还是锁着的。夜里会自己冲水。保洁阿姨都不敢开。</div><div class="time">07:56</div></div></div>
+            <div class="msg self"><div><div class="bubble">……</div><div class="time">07:57</div></div></div>
+
+            <div class="msg other"><div><div class="bubble">对了！周五操场动员大会你错过了，任校又讲他的大脑分区理论了，说学英语和学数学用的不是同一个大脑分区哈哈哈哈</div><div class="time">08:01</div></div></div>
+            <div class="msg other"><div><div class="bubble">还有那句经典："感冒？就是因为没跑起来！跑起来就不冷了！"</div><div class="time">08:01</div></div></div>
+            <div class="msg self"><div><div class="bubble">……他还是这么有精神。</div><div class="time">08:02</div></div></div>
+
+            <div class="msg other"><div><div class="bubble">然后李志胜上台了，说"你们怎么这么不尊重任校长"，底下直接一片嘘声，他当场就急眼了，脸都红了，吼着要整顿级部纪律。</div><div class="time">08:04</div></div></div>
+            <div class="msg other"><div><div class="bubble">当时任校就站在旁边，面无表情，就看着。</div><div class="time">08:05</div></div></div>
+
+            <div class="msg other"><div><div class="bubble">还有王晓老师，上周三上课讲到一半突然开始吼，整条楼道都听见了，隔壁班以为出事了。她吼完接着甩脑袋，像什么都没发生。</div><div class="time">08:10</div></div></div>
+            <div class="msg self"><div><div class="bubble">她最近是不是压力太大……</div><div class="time">08:11</div></div></div>
+
+            <div class="msg other"><div><div class="bubble">陈，你上周跳床被抓的事全班都知道了哈哈哈</div><div class="time">08:15</div></div></div>
+            <div class="msg other"><div><div class="bubble">我哪知道王晓会在楼下……我就想拿个东西，从床上跳下来，正好被她看见，当场扣 2 分。现在要抄两遍常规，手都要断了。</div><div class="time">08:16</div></div></div>
+            <div class="msg other highlight"><div><div class="bubble">说到常规……你们不觉得抄到最后，字不太对劲吗？我抄到第二遍，落款处的"蓬莱一中"四个字，总觉得像在看我。</div><div class="time">08:17</div></div></div>
+
+            <div class="msg other"><div><div class="bubble">于你昨天午休被查了？</div><div class="time">08:20</div></div></div>
+            <div class="msg other"><div><div class="bubble">别提了……我中午躺床上掏裤兜里的东西，邢波老师正好从门外路过，直接进来翻我床，翻出我的灵梦和魔理沙挂件，说："怎么还有小姑娘？"当场没收，还记了我 2 分。</div><div class="time">08:21</div></div></div>
+            <div class="msg other"><div><div class="bubble">那不是小姑娘！那是博丽灵梦和雾雨魔理沙！退魔巫女和魔法使！</div><div class="time">08:21</div></div></div>
+            <div class="msg other"><div><div class="bubble">行行行，反正挂件现在躺在德育处失物招领柜里。那个柜子密码是惯例，学号后四位，谁都知道。</div><div class="time">08:22</div></div></div>
+            <div class="msg other"><div><div class="bubble">不过于，你昨晚是不是又没睡好？</div><div class="time">08:23</div></div></div>
+            <div class="msg other"><div><div class="bubble">……昨晚查宿老师走后，走廊又有脚步声了。很轻，像没穿鞋。走到我们门口，停住了。停了好久。我盯着门缝，没敢动。后来它走了。</div><div class="time">08:24</div></div></div>
+            <div class="msg other"><div><div class="bubble">你们别笑，这周已经是第三次了。以前只是偶尔有，这周特别频繁。</div><div class="time">08:25</div></div></div>
+
+            <div class="msg other"><div><div class="bubble">对了姜，你不在的时候，李志胜天天上课时间在走廊游荡，从后门往里看，也不知道在看什么。看得人心里发毛。</div><div class="time">08:30</div></div></div>
+            <div class="msg self"><div><div class="bubble">……他在"数"什么吧。</div><div class="time">08:31</div></div></div>
+            <div class="msg other"><div><div class="bubble">？</div><div class="time">08:31</div></div></div>
+            <div class="msg other"><div><div class="bubble">早自习下课趴桌上睡着的，任校又挨个班游荡着把人叫起来了。他说"睡多了会做噩梦"。可我看那些被叫醒的人，脸色比睡着还差。</div><div class="time">08:35</div></div></div>
+            <div class="msg self"><div><div class="bubble">葛，你怎么看？</div><div class="time">08:40</div></div></div>
+            <div class="msg other"><div><div class="bubble">……我抄完了 48 条常规。落款处密密麻麻叠着名字，从 1998 年开始，一届一届，越叠越多。那不是签名，是登记。</div><div class="time">08:42</div></div></div>
+            <div class="msg other"><div><div class="bubble">姜，这所学校在"收"东西。你被赶回家那一周，可能反而救了你。</div><div class="time">08:43</div></div></div>
+        </div>
+    </div>
+</body>
+</html>
