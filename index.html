@@ -20,24 +20,26 @@
             overflow: hidden;
         }
         .container {
-            width: 720px;
+            width: 760px;
             background: rgba(250, 248, 242, 0.96);
             border-radius: 18px;
             box-shadow: 0 30px 60px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.7);
-            padding: 46px 54px;
+            padding: 40px 52px;
             animation: fadeIn 1.2s ease forwards;
             opacity: 0;
+            max-height: 92vh;
+            overflow-y: auto;
         }
         @keyframes fadeIn { to { opacity: 1; } }
-        h1 { font-size: 28px; font-weight: 600; margin-bottom: 22px; color: #1a2332; }
-        p { font-size: 15.5px; line-height: 2.0; margin-bottom: 16px; color: #3e3e3e; }
+        h1 { font-size: 27px; font-weight: 600; margin-bottom: 18px; color: #1a2332; }
+        p { font-size: 15px; line-height: 2.0; margin-bottom: 13px; color: #3e3e3e; }
         .badge {
             display: inline-block;
             background: #3d4f63; color: #e8e4d8;
             font-size: 12px; padding: 3px 12px; border-radius: 999px;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
-        .btn-wrap { margin-top: 32px; text-align: center; }
+        .btn-wrap { margin-top: 26px; text-align: center; }
         .enter-btn {
             display: inline-flex; align-items: center; gap: 10px;
             padding: 12px 46px; font-size: 16px; font-weight: 500;
@@ -49,8 +51,9 @@
         }
         .enter-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(26,35,50,0.6); }
         .enter-btn:active { transform: translateY(1px); }
-        .hint { margin-top: 24px; text-align: center; font-size: 13px; color: #8a8578; }
+        .hint { margin-top: 20px; text-align: center; font-size: 13px; color: #8a8578; }
         .ghost { color: #7a8896; }
+        .stress { color: #8f3d3d; font-weight: 600; }
     </style>
 </head>
 <body>
@@ -61,28 +64,32 @@
         <p>你是<strong>姜</strong>，蓬莱一中高二（3）班学生。</p>
 
         <p>上周三晚上，你回宿舍的路上没跑起来，被级部主任<strong>李志胜</strong>堵在了路上。</p>
-
         <p>"回宿舍的路上必须跑起来，节省时间，这是规定。为什么不跑？"<br>
         "……我累了。"<br>
         李志胜盯着你看了很久，说："<strong>累了就回家。</strong>"</p>
-
         <p>于是你被赶回家，反思了一个星期。</p>
 
-        <p>这周一，你回到学校。宿舍楼、教室、食堂，一切看起来都和走的时候一样。<br>
-        可你总觉得哪里不对——<br>
-        同学们的眼神、走廊里的风、<strong>夜里宿舍门外越来越近的脚步声</strong>……</p>
+        <p>这周一，你回到学校。李志胜没放过你——记了你 3 分，还罚了你一件"不累的活"：</p>
+        <p>"既然还有力气说累，就帮级部把这周的《常规》抄写本逐本录入系统。<strong>每天午休和晚自习前，去教学楼走廊的公共终端登记，一本都不能漏。</strong>"</p>
+
+        <p>这本该是最枯燥的惩罚。可你录着录着，发现了不对劲——</p>
+        <p><strong>上交的本子，比扣分的名单多。</strong>有人"转学"了，本子还在交。<br>
+        落款的名字叠着名字，从 1998 年叠到现在，每一页都在往下长。</p>
+        <p>最下面那一行，干干净净，只写了四个字——<span class="stress">是你的名字</span>。</p>
+        <p>你还没交过一篇常规。那这个名字，是谁替你写的？</p>
 
         <p>陈见到你的第一句话是："你不在的这一个星期，<strong>出事了</strong>。"</p>
+        <p>你沉默了一会儿，把终端里录过的登记，一份份<strong>存了下来</strong>。</p>
 
-        <p>🔔<em class="ghost">第一步，不妨试试在电脑里搜【你自己的名字】，祝你好运。</em></p>
+        <p>🔔<em class="ghost">第一步，不妨先在终端里搜【你自己的名字】，祝你好运。</em></p>
 
         <div class="btn-wrap">
             <button class="enter-btn" id="enterBtn">
-                🔦 进入教学楼
+                🔦 前往教学楼终端
             </button>
         </div>
 
-        <div class="hint">蓬莱一中 · 学生管理系统 · 22:40 后请勿在走廊停留</div>
+        <div class="hint">蓬莱一中 · 常规上交登记系统 · 22:40 后请勿在走廊停留</div>
     </div>
 
     <script>
