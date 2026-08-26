@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>坏结局 · 名单</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+        body { height: 100vh; background: #05070a; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+        .end { text-align: center; max-width: 560px; padding: 40px; animation: fadein 1.5s ease forwards; opacity: 0; }
+        @keyframes fadein { to { opacity: 1; } }
+        .end .stamp { font-size: 14px; letter-spacing: 8px; color: #e5484d; border: 2px solid #e5484d; display: inline-block; padding: 8px 24px; border-radius: 6px; transform: rotate(-6deg); margin-bottom: 34px; font-weight: 700; }
+        .end h1 { color: #dfe6ec; font-size: 26px; margin-bottom: 20px; letter-spacing: 4px; }
+        .end p { color: #7a8896; font-size: 15px; line-height: 2.2; }
+        .end .bad { color: #e5484d; }
+        .end .dark { color: #4a5568; font-size: 13px; margin-top: 28px; }
+        .end .paper { background: #0d1117; border: 1px solid #1f2937; border-radius: 8px; padding: 16px 20px; margin: 20px auto; font-size: 13px; color: #8b98a9; line-height: 1.9; text-align: left; max-width: 420px; }
+        .end .paper .red { color: #e5484d; }
+        .restart { display: inline-block; margin-top: 36px; padding: 12px 40px; border: 1px solid #2a3547; border-radius: 999px; color: #8b98a9; text-decoration: none; font-size: 14px; transition: all 0.15s; }
+        .restart:hover { border-color: #4a90d9; color: #dfe6ec; }
+    </style>
+</head>
+<body>
+    <div class="end">
+        <div class="stamp">BAD END · 名单</div>
+        <h1>名单满了，你是下一个</h1>
+        <p>你把证据交给了教育局。</p>
+        <p>两个月后，你收到了一封复函：</p>
+        <div class="paper">
+            "关于你反映的情况，经我局核查，系学生对学校管理制度的<b>误解</b>。
+            蓬莱一中教学成绩优异，各项制度公开透明，不存在你所描述的情况。
+            感谢你对教育事业的关心。"
+            <br><br>—— 青州市教育局办公室（盖章）
+        </div>
+        <p>证据不够完整，举报被一句"误解"压了下去。</p>
+        <p class="bad">你被安排"休学观察"。回到学校那天，你的名字已经出现在了《常规》上交登记的第一行。</p>
+        <p class="dark">—— 那晚起，脚步声每晚停在你门口。 ——</p>
+        <a class="restart" href="../desk.html">↺ 回到教学楼终端</a>
+    </div>
+</body>
+</html>

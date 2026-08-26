@@ -45,7 +45,7 @@
 </head>
 <body>
     <div class="topbar">
-        <span class="progress">7/12</span>
+        <span class="progress">7/16</span>
         <a class="back" href="../desk.html">← 返回终端</a>
     </div>
 
@@ -96,6 +96,7 @@
         //      于的学号 20240128 → 后四位 0128（见 student.html 学生档案）
         // ═══════════════════════════════════════
         const CORRECT_PWD = "0128";
+        let failCount = 0;
 
         function tryUnlock() {
             const input = document.getElementById('pwd').value.trim();
@@ -107,7 +108,13 @@
                 document.getElementById('cabinet').style.display = 'block';
                 err.textContent = '';
             } else {
-                err.textContent = '密码错误，请重试！';
+                failCount++;
+                if (failCount >= 5) {
+                    // 输错太多次：被"记录在案" → 坏结局「点名」
+                    window.location.href = 'badend1.html';
+                    return;
+                }
+                err.textContent = '密码错误，请重试！（还剩 ' + (5 - failCount) + ' 次机会）';
                 document.getElementById('pwd').value = '';
                 document.getElementById('pwd').focus();
             }

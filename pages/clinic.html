@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>校医室记录</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+        body { background: #232d3b; padding: 30px 20px 60px; }
+        .topbar { max-width: 820px; margin: 0 auto 20px; display: flex; align-items: center; gap: 12px; }
+        .progress { background: #3d4f63; color: #dfe6ec; padding: 4px 12px; border-radius: 999px; font-size: 12px; font-family: monospace; }
+        .back { color: #8a97a5; text-decoration: none; font-size: 13px; }
+        .back:hover { color: #aebccb; }
+        .clinic {
+            max-width: 820px; margin: 0 auto; background: #f7f5ee;
+            border-radius: 12px; padding: 32px 40px;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+        }
+        .clinic h1 { font-size: 20px; color: #1a2332; margin-bottom: 6px; }
+        .clinic .sub { font-size: 12.5px; color: #8a8578; margin-bottom: 22px; border-bottom: 2px solid #e4dfd0; padding-bottom: 12px; }
+        .record { border: 1px solid #e4dfd0; border-radius: 8px; padding: 16px 20px; margin-bottom: 14px; }
+        .record .head { display: flex; justify-content: space-between; font-size: 13px; color: #1a2332; font-weight: 600; margin-bottom: 8px; }
+        .record .head .no { color: #a09880; font-weight: 400; }
+        .record p { font-size: 13.5px; line-height: 1.9; color: #4a4438; }
+        .record .quote { background: #f0ece0; border-left: 3px solid #c9b98a; padding: 8px 14px; margin: 8px 0; font-size: 13px; color: #5a4f35; }
+        .record .dx { font-size: 12.5px; color: #8a8578; margin-top: 6px; }
+        .record.red { border-left: 5px solid #8f3d3d; background: #faf3f0; }
+        .record.red .head { color: #8f3d3d; }
+        .stats { display: flex; gap: 14px; margin: 16px 0; }
+        .stat-box { flex: 1; border: 1px solid #e4dfd0; border-radius: 8px; padding: 12px; text-align: center; }
+        .stat-box .num { font-size: 24px; font-weight: 700; color: #1a2332; font-family: monospace; }
+        .stat-box .label { font-size: 11.5px; color: #8a8578; margin-top: 4px; }
+        .stat-box .up { color: #8f3d3d; }
+        .torn { background: #f0e8d0; border: 2px dashed #a09060; border-radius: 8px; padding: 14px 18px; margin-top: 16px; font-size: 13.5px; color: #6a5a30; line-height: 1.9; }
+        .torn .line { border-bottom: 1px dashed #a09060; padding: 4px 0; }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <span class="progress">14/16</span>
+        <a class="back" href="../desk.html">← 返回终端</a>
+    </div>
+
+    <div class="clinic">
+        <h1>🏥 校医室 · 学生咨询记录</h1>
+        <div class="sub">2025 年度 · 密级：内部 · 校医：周医生</div>
+
+        <div class="record">
+            <div class="head"><span>记录 031 · 孙某（高二4班）</span><span class="no">2025.12.10</span></div>
+            <div class="quote">"医生，我夜里总听见有人喊我名字。喊得特别清楚，像我妈，又像我们班主任。我不敢应。可我室友说他们什么都没听见。"</div>
+            <p>自述近两周睡眠严重不足，抄写《常规》后手指发抖，字迹与从前不同。检查未见器质性病变。</p>
+            <div class="dx">建议：学习压力大，注意休息。→ 12.15 该生记 5 分，12.17 办理转学。</div>
+        </div>
+
+        <div class="record">
+            <div class="head"><span>记录 028 · 刘某（高三2班）</span><span class="no">2025.12.02</span></div>
+            <div class="quote">"我抄到第三遍的时候，落款那行字不是我的笔迹了。我发誓我写的是'刘某'，可本子上那两个字，像别人替我写的。"</div>
+            <p>自述晨起后对前一晚记忆模糊，常发现作业本上多出整页自己没印象的抄写内容。</p>
+            <div class="dx">建议：转介心理咨询。→ 12.14 该生记 3 分，12.16 休学。</div>
+        </div>
+
+        <div class="record red">
+            <div class="head"><span>记录 017 · 于（高二3班）</span><span class="no">2025.12.20</span></div>
+            <div class="quote">"昨晚查宿结束后，脚步声又来了。停在我门口，整整三分钟。我从门缝底下看到——有一张纸被塞了进来，是我被没收挂件那天写的检讨。"</div>
+            <p>自述自挂件被没收后，夜间反复惊醒。检查：精神状态差，建议<b>暂停晚间抄写任务</b>。</p>
+            <div class="dx">备注（红笔）：级部不同意暂停，批注"抄写任务照常"。签字处被撕掉。</div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-box"><div class="num">42</div><div class="label">2023 年"睡眠障碍"就诊</div></div>
+            <div class="stat-box"><div class="num">67</div><div class="label">2024 年就诊</div></div>
+            <div class="stat-box"><div class="num up">103</div><div class="label">2025 年就诊（↑）</div></div>
+        </div>
+        <p style="font-size:12.5px; color:#8a8578; margin-bottom:14px;">其中 <b style="color:#8f3d3d;">91 人</b>在就诊前 30 天内有过扣分记录。1998 年以前，同类记录年均不超过 10 例。</p>
+
+        <div class="torn">
+            <div class="line">📄 档案夹最后有一页被撕掉，只残留撕口边缘的几行字（透光可辨）：</div>
+            <div class="line" style="color:#8f3d3d;">"……扣分与就诊记录的关联数据已整理，建议对外口径统一为'学业压力'……"</div>
+            <div class="line" style="color:#8f3d3d;">"……寇校长指示：此类记录不必保留明细……"</div>
+            <div class="line" style="color:#8a8578;">撕口时间：2025.12.18 · 撕页人：级部（校医称"他们来收的"）</div>
+        </div>
+    </div>
+
+    <script>
+        // 证据标记：访问过校医室记录
+        localStorage.setItem('zs_clue_clinic', '1');
+    </script>
+</body>
+</html>

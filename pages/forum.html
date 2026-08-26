@@ -58,7 +58,7 @@
 </head>
 <body>
     <div class="topbar">
-        <span class="progress">8/12</span>
+        <span class="progress">8/16</span>
         <a class="back" href="../desk.html">← 返回终端</a>
     </div>
 
@@ -118,6 +118,7 @@
         // ═══════════════════════════════════════
         const CORRECT_USER = "jiushi";
         const CORRECT_PASS = "19980601";
+        let failCount = 0;
 
         function tryLogin() {
             document.getElementById('loginOverlay').style.display = 'flex';
@@ -131,6 +132,8 @@
             if (user === CORRECT_USER && pass === CORRECT_PASS) {
                 msg.className = 'login-msg ok';
                 msg.textContent = '验证成功，正在加载归档区...';
+                // 证据标记：访问过校园墙归档区
+                localStorage.setItem('zs_clue_forum', '1');
                 setTimeout(() => {
                     document.getElementById('loginOverlay').style.display = 'none';
                     document.getElementById('loginState').textContent = '管理员：jiushi';
@@ -138,8 +141,14 @@
                     document.getElementById('secretPost').style.display = 'flex';
                 }, 600);
             } else {
+                failCount++;
+                if (failCount >= 5) {
+                    // 输错太多次：身份被"记录" → 坏结局「点名」
+                    window.location.href = 'badend1.html';
+                    return;
+                }
                 msg.className = 'login-msg error';
-                msg.textContent = '账号或口令错误，请重试！';
+                msg.textContent = '用户名或密码错误，请重试！（还剩 ' + (5 - failCount) + ' 次机会）';
                 document.getElementById('loginPwd').value = '';
             }
         }

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>坏结局 · 点名</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+        body { height: 100vh; background: #05070a; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+        .end { text-align: center; max-width: 560px; padding: 40px; animation: fadein 1.5s ease forwards; opacity: 0; }
+        @keyframes fadein { to { opacity: 1; } }
+        .end .stamp { font-size: 14px; letter-spacing: 8px; color: #e5484d; border: 2px solid #e5484d; display: inline-block; padding: 8px 24px; border-radius: 6px; transform: rotate(-6deg); margin-bottom: 34px; font-weight: 700; }
+        .end h1 { color: #dfe6ec; font-size: 26px; margin-bottom: 20px; letter-spacing: 4px; }
+        .end p { color: #7a8896; font-size: 15px; line-height: 2.2; }
+        .end .bad { color: #e5484d; }
+        .end .dark { color: #4a5568; font-size: 13px; margin-top: 28px; }
+        .restart { display: inline-block; margin-top: 36px; padding: 12px 40px; border: 1px solid #2a3547; border-radius: 999px; color: #8b98a9; text-decoration: none; font-size: 14px; transition: all 0.15s; }
+        .restart:hover { border-color: #4a90d9; color: #dfe6ec; }
+    </style>
+</head>
+<body>
+    <div class="end">
+        <div class="stamp">BAD END · 点名</div>
+        <h1>你的名字，被圈了起来</h1>
+        <p>那晚之后，你总觉得自己忘了点什么。</p>
+        <p>同学叫你的名字，你要反应很久。作业本上的字，慢慢变得不像你写的。</p>
+        <p class="bad">第二天，级部的《常规》上交登记上，第一行出现了你的名字——字迹工整，不是你的笔迹。</p>
+        <p>没有人记得你被赶回家过。也没有人记得，你曾经准备过一个证据袋。</p>
+        <p class="dark">—— 名单上的人，不需要记得自己。 ——</p>
+        <a class="restart" href="../desk.html">↺ 回到教学楼终端</a>
+    </div>
+</body>
+</html>

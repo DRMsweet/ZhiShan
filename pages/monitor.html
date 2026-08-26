@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>监控回放</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+        body { background: #10151c; padding: 30px 20px 60px; }
+        .topbar { max-width: 900px; margin: 0 auto 20px; display: flex; align-items: center; gap: 12px; }
+        .progress { background: #3d4f63; color: #dfe6ec; padding: 4px 12px; border-radius: 999px; font-size: 12px; font-family: monospace; }
+        .back { color: #8a97a5; text-decoration: none; font-size: 13px; }
+        .back:hover { color: #aebccb; }
+        .cctv {
+            max-width: 900px; margin: 0 auto; background: #0d1117;
+            border: 1px solid #1f2937; border-radius: 12px; overflow: hidden;
+            box-shadow: 0 12px 36px rgba(0,0,0,0.5);
+        }
+        .cctv-bar { background: #161d27; padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1f2937; }
+        .cctv-bar .title { color: #8b98a9; font-size: 13px; }
+        .cctv-bar .rec { color: #e5484d; font-size: 12px; animation: blink 1.2s infinite; }
+        @keyframes blink { 50% { opacity: 0.3; } }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 14px; }
+        .cam { background: #0a0e14; border: 1px solid #1f2937; border-radius: 8px; overflow: hidden; position: relative; }
+        .cam .cam-head { padding: 8px 12px; font-size: 12px; color: #8b98a9; display: flex; justify-content: space-between; border-bottom: 1px solid #161d27; }
+        .cam .screen { height: 170px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #4a5568; font-size: 12px; gap: 8px; position: relative; }
+        .cam .screen .noise { position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0 1px, transparent 1px 3px); }
+        .cam .screen .ts { position: absolute; top: 6px; left: 10px; color: #22c55e; font-family: monospace; font-size: 11px; }
+        .cam .screen .shadow { position: absolute; bottom: 0; width: 60px; height: 130px; background: linear-gradient(to top, rgba(0,0,0,0.85), transparent); border-radius: 40% 40% 0 0; opacity: 0; transition: opacity 1s; }
+        .cam .screen .shadow.on { opacity: 1; animation: creep 4s ease-in-out infinite; }
+        @keyframes creep { 0%,100% { transform: translateX(0); } 50% { transform: translateX(120px); } }
+        .cam.hot .screen { background: radial-gradient(ellipse at center, #141b26, #0a0e14); }
+        .cam.hot .screen::after { content: ""; position: absolute; bottom: 24px; left: 30%; width: 40%; height: 3px; background: rgba(229,72,77,0.35); filter: blur(2px); }
+        .timeline { padding: 4px 18px 16px; }
+        .timeline-bar { height: 30px; background: #161d27; border-radius: 6px; display: flex; align-items: center; padding: 0 8px; gap: 6px; }
+        .tick { height: 18px; width: 2px; background: #2a3547; border-radius: 1px; }
+        .tick.red { background: #e5484d; }
+        .play-row { display: flex; gap: 10px; padding: 0 18px 18px; align-items: center; }
+        .play-btn { background: #1f2937; color: #dfe6ec; border: none; border-radius: 8px; padding: 10px 22px; font-size: 14px; cursor: pointer; transition: background 0.15s; }
+        .play-btn:hover { background: #2a3547; }
+        .play-btn.playing { background: #3d4f63; }
+        .log-box { flex-grow: 1; background: #0a0e14; border: 1px solid #1f2937; border-radius: 8px; padding: 10px 14px; font-size: 12.5px; color: #8b98a9; line-height: 1.8; min-height: 52px; }
+        .log-box .red { color: #e5484d; }
+        .log-box .green { color: #22c55e; }
+        .note { max-width: 900px; margin: 18px auto 0; background: #f5ecd0; border-left: 5px solid #c9a227; padding: 14px 18px; border-radius: 0 8px 8px 0; font-size: 13.5px; line-height: 1.9; color: #5a4f35; }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <span class="progress">11/16</span>
+        <a class="back" href="../desk.html">← 返回终端</a>
+    </div>
+
+    <div class="cctv">
+        <div class="cctv-bar">
+            <span class="title">📹 教学楼监控回放系统 · 2025-12-22</span>
+            <span class="rec">● REC</span>
+        </div>
+        <div class="grid">
+            <div class="cam">
+                <div class="cam-head"><span>CAM-03 一层大厅</span><span>正常</span></div>
+                <div class="screen"><div class="noise"></div><div class="ts">22:10:02</div>空镜 · 无人</div>
+            </div>
+            <div class="cam">
+                <div class="cam-head"><span>CAM-05 二层走廊</span><span>正常</span></div>
+                <div class="screen"><div class="noise"></div><div class="ts">22:15:47</div>空镜 · 无人</div>
+            </div>
+            <div class="cam hot">
+                <div class="cam-head"><span style="color:#e5484d;">CAM-07 B栋三层走廊</span><span style="color:#e5484d;">异常</span></div>
+                <div class="screen">
+                    <div class="noise"></div>
+                    <div class="ts" id="cam7ts">22:37:00</div>
+                    <div class="shadow" id="shadow"></div>
+                    回放中 · 见下方日志
+                </div>
+            </div>
+            <div class="cam">
+                <div class="cam-head"><span>CAM-09 操场方向</span><span>正常</span></div>
+                <div class="screen"><div class="noise"></div><div class="ts">22:19:31</div>空镜 · 无人</div>
+            </div>
+        </div>
+        <div class="timeline">
+            <div class="timeline-bar">
+                <span style="color:#4a5568; font-size:11px; margin-right:6px;">22:30</span>
+                <div class="tick"></div><div class="tick"></div><div class="tick red"></div><div class="tick red"></div><div class="tick"></div><div class="tick"></div><div class="tick red"></div><div class="tick red"></div><div class="tick red"></div><div class="tick"></div>
+                <span style="color:#4a5568; font-size:11px; margin-left:6px;">22:40</span>
+            </div>
+        </div>
+        <div class="play-row">
+            <button class="play-btn" id="playBtn" onclick="playLog()">▶ 播放异常片段</button>
+            <div class="log-box" id="logBox">点击播放查看 CAM-07 回放记录…</div>
+        </div>
+    </div>
+
+    <div class="note" style="display:none;" id="reveal">
+        🎥 <b>CAM-07 回放日志（22:36-22:39）：</b><br>
+        22:36:58 走廊空无一人，地面出现一道<b>缓慢移动的影子</b>，无对应人影。<br>
+        22:37:31 影子停在 <b>317 宿舍门口</b>（于的房间），停留 47 秒后离开。<br>
+        22:39:12 画面闪烁，<b>走廊尽头的旧楼通道门开了一条缝</b>，露出漆黑。下一秒画面恢复正常。<br>
+        <span style="color:#8f3d3d;"><b>系统备注：本周三份《常规》抄写本上交当晚，CAM-07 走廊异常事件频率较平时高 3 倍。已上报总务处。影像原件仅此一份，未做备份。</b></span>
+    </div>
+
+    <script>
+        // 证据标记：访问过监控页
+        localStorage.setItem('zs_clue_monitor', '1');
+        var playing = false;
+        function playLog() {
+            var btn = document.getElementById('playBtn');
+            var log = document.getElementById('logBox');
+            var reveal = document.getElementById('reveal');
+            var shadow = document.getElementById('shadow');
+            var ts = document.getElementById('cam7ts');
+            if (!playing) {
+                playing = true;
+                btn.classList.add('playing');
+                btn.textContent = '⏸ 播放中…';
+                log.innerHTML = '22:36:58 <span class="green">检测到移动目标</span> — 走廊空无一人…';
+                shadow.classList.add('on');
+                setTimeout(() => { ts.textContent = '22:37:31'; }, 1500);
+                setTimeout(() => { log.innerHTML = '22:37:31 <span class="red">目标停留在 317 门口</span> — 停留 47 秒'; }, 2500);
+                setTimeout(() => { ts.textContent = '22:39:12'; shadow.classList.remove('on'); }, 4000);
+                setTimeout(() => { log.innerHTML = '22:39:12 <span class="red">画面闪烁 — 旧楼通道门开了一条缝</span>'; }, 5000);
+                setTimeout(() => {
+                    log.innerHTML = '回放结束。<span class="red">异常片段共 3 处。</span>';
+                    btn.textContent = '▶ 重播';
+                    btn.classList.remove('playing');
+                    reveal.style.display = 'block';
+                    playing = false;
+                }, 7000);
+            }
+        }
+    </script>
+</body>
+</html>

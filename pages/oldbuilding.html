@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>旧楼档案</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+        body { background: #232d3b; padding: 30px 20px 60px; }
+        .topbar { max-width: 860px; margin: 0 auto 20px; display: flex; align-items: center; gap: 12px; }
+        .progress { background: #3d4f63; color: #dfe6ec; padding: 4px 12px; border-radius: 999px; font-size: 12px; font-family: monospace; }
+        .back { color: #8a97a5; text-decoration: none; font-size: 13px; }
+        .back:hover { color: #aebccb; }
+        .folder {
+            max-width: 860px; margin: 0 auto; background: #e8dcc0;
+            border-radius: 8px; padding: 38px 46px;
+            box-shadow: 0 14px 36px rgba(0,0,0,0.45);
+            font-family: "Songti SC", "SimSun", serif;
+            position: relative;
+        }
+        .folder::before { content: "🏚️ 档案袋 · 1998-旧教学楼"; position: absolute; top: -14px; left: 30px; background: #c9b98a; color: #4a3f2a; font-size: 12px; padding: 4px 14px; border-radius: 6px; font-family: sans-serif; }
+        .folder h1 { font-size: 21px; color: #3a2e1a; margin-bottom: 20px; text-align: center; letter-spacing: 6px; }
+        .doc { background: #f5f0e0; border: 1px solid #d8cba8; border-radius: 6px; padding: 22px 26px; margin-bottom: 18px; }
+        .doc h2 { font-size: 15px; color: #5a4a2a; margin-bottom: 10px; border-bottom: 1px solid #d8cba8; padding-bottom: 8px; }
+        .doc p { font-size: 14px; line-height: 2.0; color: #4a4030; text-indent: 2em; }
+        .doc .no-indent { text-indent: 0; }
+        .doc .strike { text-decoration: line-through; color: #8f3d3d; }
+        .doc .note { background: #fff8e1; border: 1px dashed #c9a227; padding: 10px 14px; font-size: 13px; line-height: 1.9; margin-top: 12px; border-radius: 6px; }
+        /* 平面图 */
+        .map { display: flex; gap: 18px; margin-top: 14px; }
+        .map-box { flex: 1; border: 2px solid #b8a87a; border-radius: 8px; padding: 14px; text-align: center; font-size: 12px; color: #6a5a30; }
+        .map-box h3 { font-size: 13px; margin-bottom: 8px; color: #4a3f2a; }
+        .map-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 10px 0; }
+        .map-cell { border: 1px solid #c9b98a; height: 44px; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #7a6a40; background: #f0ead6; }
+        .map-cell.temple { background: #5a4a3d; color: #e8dcc0; font-weight: 700; border: 2px solid #8f3d3d; }
+        .map-cell.hl { border: 2px dashed #8f3d3d; color: #8f3d3d; font-weight: 700; }
+        .seal { display: inline-block; border: 3px solid rgba(143,61,61,0.6); color: rgba(143,61,61,0.8); padding: 5px 12px; border-radius: 5px; font-size: 13px; font-weight: 700; transform: rotate(-6deg); margin-left: 10px; font-family: sans-serif; }
+        .ink-note { font-family: sans-serif; font-size: 12.5px; color: #8f3d3d; line-height: 1.8; }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <span class="progress">12/16</span>
+        <a class="back" href="../desk.html">← 返回终端</a>
+    </div>
+
+    <div class="folder">
+        <h1>旧教学楼 · 封闭档案</h1>
+
+        <div class="doc">
+            <h2>📐 旧教学楼平面图（1997 年绘制）</h2>
+            <div class="map">
+                <div class="map-box">
+                    <h3>一层 · 原址标注</h3>
+                    <div class="map-grid">
+                        <div class="map-cell">教室</div>
+                        <div class="map-cell">教室</div>
+                        <div class="map-cell">楼梯</div>
+                        <div class="map-cell temple">城隍庙<br>地基</div>
+                        <div class="map-cell">过道</div>
+                        <div class="map-cell">储藏室</div>
+                        <div class="map-cell">教室</div>
+                        <div class="map-cell hl">1998.6.1<br>事发点</div>
+                        <div class="map-cell">楼梯</div>
+                    </div>
+                    <div style="font-size:11px; color:#8a7a50; margin-top:6px;">城隍庙地基位于楼体正下方 · 施工时未作处理</div>
+                </div>
+                <div class="map-box">
+                    <h3>一层 · 铅笔手写标注</h3>
+                    <div class="ink-note" style="text-align:left; line-height:2.2;">
+                        ✎ "地基挖下去三米就是旧庙的地宫入口，当年填了一半没填完。"<br>
+                        ✎ "6/1 出事那天，储藏室的门是从里面锁上的。里面没有人。"<br>
+                        ✎ "压着的东西……不能见光。"<br>
+                        <span style="color:#6a5a30;">——笔迹与总务处旧档一致，疑似寇润平</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="doc">
+            <h2>📄 旧教学楼封闭报告（1998.6.3 呈报）</h2>
+            <p>1998 年 6 月 1 日晚 22 时许，旧教学楼一层储藏室传出异响，值班教师巡查未发现异常。
+            次日凌晨，楼体出现轻微震动，经评估存在<strong>地基沉降</strong>风险，为保障师生安全，
+            决定对旧教学楼实施封闭处理。封闭期间禁止一切人员进入。</p>
+            <p class="no-indent" style="font-size:13px; color:#8a7a50;">报告人：寇润平（时任总务主任）　呈报：校务会</p>
+        </div>
+
+        <div class="doc">
+            <h2>📊 地基沉降检测报告（两版，注意日期）</h2>
+            <p class="no-indent" style="font-size:13.5px;"><b>检测一</b>（1998.5.30，封闭前 2 天）：</p>
+            <p class="no-indent" style="font-size:13.5px; color:#2c5a3d;">结论：楼体沉降量 <b>0.8mm</b>，处于正常范围，<b>无异常</b>，可正常使用。</p>
+            <p class="no-indent" style="font-size:13.5px;"><b>检测二</b>（1998.6.4，封闭后 3 天）：</p>
+            <p class="no-indent" style="font-size:13.5px; color:#8f3d3d;">结论：楼体沉降量 <b>41mm</b>，判定危险，建议永久封闭。<span class="strike">（数据疑似人为修改）</span></p>
+            <div class="note">
+                🖋 档案室批注（红笔）：两份检测报告间隔 5 天，沉降量相差 50 倍，且第一份报告<b>没有检测单位盖章</b>。
+                5.30 还"无异常"，6.1 就"连夜封闭"——封闭的理由，从来不是地基。
+            </div>
+        </div>
+
+        <div class="doc">
+            <h2>🗝️ 储藏室物品清点单（1998.6.5）</h2>
+            <p class="no-indent" style="font-size:13.5px;">课本 142 册 · 实验器材 2 箱 · 老式挂钟 1 座 · <strong style="color:#8f3d3d;">黄纸符箓一沓（已焚毁）</strong> · <strong style="color:#8f3d3d;">铁质香炉 1 尊（已上缴）</strong> · 无主衣物若干</p>
+            <p class="no-indent ink-note">✎ 清点人在"已焚毁""已上缴"两栏旁画了问号。问号被橡皮擦过，又画了一遍。</p>
+        </div>
+    </div>
+
+    <script>
+        // 证据标记：访问过旧楼档案
+        localStorage.setItem('zs_clue_oldbuilding', '1');
+    </script>
+</body>
+</html>

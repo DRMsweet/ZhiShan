@@ -160,6 +160,14 @@
             <div class="icon-image" style="background:#3d6a55;">📋</div>
             <div class="icon-label">扣分登记表</div>
         </a>
+        <a href="pages/monitor.html" target="_blank" class="desktop-icon">
+            <div class="icon-image" style="background:#2c3e50;">🎥</div>
+            <div class="icon-label">监控回放</div>
+        </a>
+        <a href="pages/scriptbook.html" target="_blank" class="desktop-icon">
+            <div class="icon-image" style="background:#8a7a55;">📖</div>
+            <div class="icon-label">常规抄写本</div>
+        </a>
     </div>
 
     <!-- Spotlight 搜索 -->
@@ -188,9 +196,9 @@
         <h4 style="color:#4a90d9;">💡 备注</h4>
         <p>这台电脑是教学楼走廊的公共终端，所有学生均可使用。</p>
         <p>信息获取仅依赖内部搜索，无需外部搜索。</p>
-        <p>部分页面（3/4/5/8/10页）不包含关键词，不影响线索推进。</p>
+        <p>部分页面（3/4/5/8/15页）不包含关键词，不影响线索推进。</p>
         <p>若点击无响应，则表示该信息无关，无需使用 F12 查看源码。</p>
-        <p style="margin-top:6px; font-size:11px; color:#5a6a7a;">22:40 后请勿在走廊停留。</p>
+        <p style="margin-top:6px; font-size:11px; color:#5a6a7a;">22:40 后请勿在走廊停留。不要应陌生人的呼唤。</p>
     </div>
 
     <!-- Dock -->
@@ -199,9 +207,11 @@
         <a href="pages/forum.html" target="_blank" class="dock-link"><div class="dock-icon">🗨️</div></a>
         <a href="pages/locker.html" target="_blank" class="dock-link"><div class="dock-icon">🔒</div></a>
         <a href="pages/news.html" target="_blank" class="dock-link"><div class="dock-icon">📰</div></a>
+        <a href="pages/oldbuilding.html" target="_blank" class="dock-link"><div class="dock-icon">🏚️</div></a>
+        <a href="pages/clinic.html" target="_blank" class="dock-link"><div class="dock-icon">🏥</div></a>
     </div>
 
-    <div class="progress">1/12</div>
+    <div class="progress">1/16</div>
 
     <script>
         // ═══════════════════════════════════════
@@ -273,6 +283,51 @@
                 file: "pages/locker.html",
                 label: "德育处·失物招领登记",
                 type: "系统", icon: "🔒", color: "#8f6a3d"
+            },
+            "监控": {
+                file: "pages/monitor.html",
+                label: "教学楼监控回放系统",
+                type: "系统", icon: "🎥", color: "#2c3e50"
+            },
+            "摄像头": {
+                file: "pages/monitor.html",
+                label: "教学楼监控回放系统",
+                type: "系统", icon: "🎥", color: "#2c3e50"
+            },
+            "旧楼": {
+                file: "pages/oldbuilding.html",
+                label: "旧教学楼·封闭档案（1998）",
+                type: "档案", icon: "🏚️", color: "#5a4a3d"
+            },
+            "旧教学楼": {
+                file: "pages/oldbuilding.html",
+                label: "旧教学楼·封闭档案（1998）",
+                type: "档案", icon: "🏚️", color: "#5a4a3d"
+            },
+            "城隍庙": {
+                file: "pages/oldbuilding.html",
+                label: "旧教学楼·封闭档案（1998）",
+                type: "档案", icon: "🏚️", color: "#5a4a3d"
+            },
+            "抄写本": {
+                file: "pages/scriptbook.html",
+                label: "《常规》手抄本·扫描件（2025.12 收）",
+                type: "文档", icon: "📖", color: "#8a7a55"
+            },
+            "校医室": {
+                file: "pages/clinic.html",
+                label: "校医室·学生咨询记录",
+                type: "档案", icon: "🏥", color: "#3d6a8f"
+            },
+            "心理": {
+                file: "pages/clinic.html",
+                label: "校医室·学生咨询记录",
+                type: "档案", icon: "🏥", color: "#3d6a8f"
+            },
+            "宿舍": {
+                file: "pages/dorm.html",
+                label: "宿舍楼·B栋（夜间）",
+                type: "位置", icon: "🌙", color: "#4a3d6a"
             },
             "校园墙": {
                 file: "pages/forum.html",

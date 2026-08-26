@@ -12,8 +12,8 @@
             padding: 50px 20px; display: flex; justify-content: center;
         }
         .letter {
-            max-width: 720px; background: #f2eeda; border-radius: 10px;
-            padding: 52px 58px; box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+            max-width: 760px; background: #f2eeda; border-radius: 10px;
+            padding: 46px 56px; box-shadow: 0 30px 80px rgba(0,0,0,0.6);
             position: relative; font-family: "Songti SC", "SimSun", serif;
         }
         .letter::before {
@@ -22,34 +22,61 @@
             width: 64px; height: 64px; display: flex; align-items: center; justify-content: center;
             box-shadow: 0 6px 18px rgba(0,0,0,0.3);
         }
-        h1 { font-size: 24px; color: #1a2332; margin-bottom: 22px; text-align: center; letter-spacing: 4px; }
+        .topbar { position: absolute; top: -46px; left: 0; display: flex; gap: 12px; align-items: center; }
+        .progress { background: #3d4f63; color: #dfe6ec; padding: 4px 12px; border-radius: 999px; font-size: 12px; font-family: monospace; }
+        h1 { font-size: 24px; color: #1a2332; margin-bottom: 20px; text-align: center; letter-spacing: 4px; }
         .letter p { font-size: 15px; line-height: 2.1; color: #4a4438; text-indent: 2em; margin-bottom: 12px; }
-        .letter .sig { text-align: right; margin-top: 28px; color: #8a8578; }
+        .letter .sig { text-align: right; margin-top: 26px; color: #8a8578; }
         .letter .sig .name { font-size: 18px; color: #1a2332; font-weight: 700; }
+
+        /* 证据清单 */
         .evidence {
             background: #e8e0c0; border: 1px dashed #8f6a1a; border-radius: 10px;
             padding: 18px 22px; margin: 22px 0; font-size: 14px; line-height: 2.0; color: #4a3f2a;
         }
-        .evidence b { color: #8f3d3d; }
-        .evidence .code { font-family: monospace; background: #f7f5ee; padding: 1px 6px; border-radius: 4px; font-size: 12.5px; }
-        .final-btn {
-            display: block; margin: 30px auto 0; padding: 14px 48px;
-            background: linear-gradient(to bottom, #44566b, #2c3e50); color: #dfe6ec;
-            border: none; border-radius: 999px; font-size: 16px; cursor: pointer;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.45); transition: all 0.15s;
+        .evidence h3 { font-size: 14px; margin-bottom: 8px; color: #5a4a2a; }
+        .evidence .item { display: flex; align-items: center; gap: 10px; padding: 3px 0; }
+        .evidence .dot { width: 18px; height: 18px; border-radius: 50%; border: 2px solid #a09060; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #fff; flex-shrink: 0; }
+        .evidence .dot.got { background: #2c6e3d; border-color: #2c6e3d; }
+        .evidence .dot.miss { background: transparent; }
+        .evidence .name { font-size: 13.5px; }
+        .evidence .name.missed { color: #a09060; }
+        .evidence .status { margin-left: auto; font-size: 12px; color: #8a8578; }
+        .evidence .status.got { color: #2c6e3d; }
+        .evidence .warn { display: none; background: #f5e3e3; border: 1px solid #c99a8f; border-radius: 6px; padding: 8px 12px; font-size: 12.5px; color: #8f3d3d; margin-top: 10px; line-height: 1.7; }
+        .evidence .warn.on { display: block; }
+
+        /* 抉择 */
+        .choices { display: flex; flex-direction: column; gap: 12px; margin-top: 22px; }
+        .choice {
+            display: flex; align-items: center; gap: 12px; padding: 14px 20px;
+            border-radius: 10px; border: 1.5px solid #d8cba8; background: #f7f5ee;
+            font-size: 14.5px; color: #3e3e3e; cursor: pointer; text-align: left;
+            transition: all 0.15s; font-family: sans-serif; line-height: 1.6;
         }
-        .final-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,0.55); }
-        .end-note { text-align: center; color: #8a8578; font-size: 12px; margin-top: 18px; letter-spacing: 2px; }
+        .choice:hover { border-color: #2c6e3d; background: #f0f5ec; }
+        .choice .key { font-weight: 700; color: #2c6e3d; margin-right: 6px; }
+        .choice.good { background: #eef5ec; border-color: #2c6e3d; }
+        .choice.good .key { color: #2c6e3d; }
+        .choice.danger { border-color: #c99a8f; }
+        .choice.danger:hover { border-color: #8f3d3d; background: #faf0ee; }
+        .choice.danger .key { color: #8f3d3d; }
+        .choice.disabled { opacity: 0.55; cursor: not-allowed; }
+        .choice .sub { font-size: 12px; color: #8a8578; }
+        .ghost-line { text-align: center; color: #8a8578; font-size: 12px; margin-top: 24px; letter-spacing: 4px; font-family: sans-serif; }
         .toast {
             display: none; position: fixed; top: 40px; left: 50%; transform: translateX(-50%);
-            background: rgba(10,14,20,0.9); color: #dfe6ec; padding: 14px 28px;
-            border-radius: 999px; font-size: 14px; z-index: 999;
+            background: rgba(10,14,20,0.92); color: #dfe6ec; padding: 14px 28px;
+            border-radius: 999px; font-size: 14px; z-index: 999; text-align: center; line-height: 1.6;
         }
-        .ghost-line { text-align: center; color: #8a8578; font-size: 13px; margin-top: 22px; letter-spacing: 6px; }
     </style>
 </head>
 <body>
     <div class="letter">
+        <div class="topbar">
+            <span class="progress">16/16</span>
+        </div>
+
         <h1>最后一篇《常规》</h1>
 
         <p>我是姜，高二（3）班学生。按学校规定，每扣一分要抄一遍《常规》。这篇，是我抄的第十二遍。</p>
@@ -75,44 +102,115 @@
         是怕你带着护身的东西。而夜里宿舍走廊那第四个脚步声——
         <strong>它在找名字还没抄完的人。</strong></p>
 
-        <div class="evidence">
-            📂 <b>随这篇《常规》附上的证据：</b><br>
-            ① 扣分登记表（2025-2026上，李志胜签）——名单与"转学"记录重合<br>
-            ② 《常规》抄写本 37 本，落款人数比扣分名单多 6 人<br>
-            ③ 德育处值班日志（脚步声记录、会议记录、常规核查）<br>
-            ④ 校史特刊底稿 + 1998 年封闭报告涂改页复印件<br>
-            ⑤ 校园墙归档区 2018 届管理员留档（完整版）
-        </div>
-
-        <p>教育局纪检科的地址，我已经写在证据袋上了。这些东西，不该被压在地基底下，
-        也不该烂在级部的柜子里。<strong>它们该被看见。</strong></p>
-
         <p>对了，还有一件事。</p>
 
         <p>李志胜主任问我，回宿舍的路上为什么不跑起来。我说我累了。<br>
-        现在我知道了——那晚的脚步声，不是他。</p>
-
-        <p>这一次，我跑起来了。</p>
+        现在我知道了——那晚的脚步声，不是他。<br>
+        <strong>这一次，我跑起来了。</strong></p>
 
         <div class="sig">
             —— <span class="name">姜</span><br>
-            2025 年 12 月 24 日 · 于教学楼三层
+            2025 年 12 月 25 日 · 于教学楼三层
         </div>
 
-        <button class="final-btn" onclick="report()">📤 将证据提交至教育局纪检科</button>
-        <div class="ghost-line">—— 蓬莱一中 · 夜晚的脚步声 · 完 ——</div>
+        <!-- 证据清单 -->
+        <div class="evidence" id="evidence">
+            <h3>📂 随这篇《常规》附上的证据：</h3>
+            <div class="item"><span class="dot" id="d1"></span><span class="name" id="n1">扣分登记表（级部存档）</span><span class="status" id="s1"></span></div>
+            <div class="item"><span class="dot" id="d2"></span><span class="name" id="n2">《常规》抄写本 + 落款页（点名册）</span><span class="status" id="s2"></span></div>
+            <div class="item"><span class="dot" id="d3"></span><span class="name" id="n3">值班日志 + 便条（脚步声记录）</span><span class="status" id="s3"></span></div>
+            <div class="item"><span class="dot" id="d4"></span><span class="name" id="n4">监控回放 CAM-07（异常片段）</span><span class="status" id="s4"></span></div>
+            <div class="item"><span class="dot" id="d5"></span><span class="name" id="n5">旧楼封闭档案 + 检测报告矛盾</span><span class="status" id="s5"></span></div>
+            <div class="item"><span class="dot" id="d6"></span><span class="name" id="n6">校医室咨询记录（关联数据）</span><span class="status" id="s6"></span></div>
+            <div class="item"><span class="dot" id="d7"></span><span class="name" id="n7">校园墙归档区 2018 届留档</span><span class="status" id="s7"></span></div>
+            <div class="warn" id="warn">⚠️ 证据还不够完整。教育局曾以"系学生误解"压下过同类举报——证据不足，就是给寇润平递刀。先回去找齐证据。</div>
+        </div>
+
+        <!-- 抉择 -->
+        <div class="choices">
+            <button class="choice good" id="btnReport" onclick="submitReport()">
+                <span class="key">📤 A.</span> 提交给教育局纪检科
+                <span class="sub" style="margin-left:auto;">把真相交给权限之外的人</span>
+            </button>
+            <button class="choice danger" id="btnLi" onclick="callLi()">
+                <span class="key">📞 B.</span> 先联系李志胜主任
+                <span class="sub" style="margin-left:auto;">他是级部主任，也许能帮上忙…</span>
+            </button>
+        </div>
+
+        <div class="ghost-line">—— 蓬莱一中 · 夜晚的脚步声 · 终章 ——</div>
     </div>
 
     <div class="toast" id="toast">✅ 提交成功。当晚，宿舍走廊里再没有脚步声了。名单，停在了那一页。</div>
 
     <script>
-        function report() {
-            document.getElementById('toast').style.display = 'block';
-            const btn = document.querySelector('.final-btn');
-            btn.disabled = true;
-            btn.textContent = '✅ 已提交';
-            btn.style.opacity = 0.7;
+        // ═══════════════════════════════════════
+        // 证据收集检查（localStorage 标记）
+        // 关键证据页：grades/locker、scriptbook、audit、monitor、oldbuilding、clinic、forum
+        // 至少收集 5 项才能提交，否则触发坏结局「名单」
+        // ═══════════════════════════════════════
+        var CLUES = [
+            { key: 'zs_clue_grades',     id: 'd1', n: 'n1', s: 's1', name: '扣分登记表 + 常规抄写本' },
+            { key: 'zs_clue_scriptbook', id: 'd2', n: 'n2', s: 's2', name: '《常规》落款页（点名册）' },
+            { key: 'zs_clue_audit',      id: 'd3', n: 'n3', s: 's3', name: '值班日志 + 便条' },
+            { key: 'zs_clue_monitor',    id: 'd4', n: 'n4', s: 's4', name: '监控回放 CAM-07' },
+            { key: 'zs_clue_oldbuilding', id: 'd5', n: 'n5', s: 's5', name: '旧楼封闭档案' },
+            { key: 'zs_clue_clinic',     id: 'd6', n: 'n6', s: 's6', name: '校医室咨询记录' },
+            { key: 'zs_clue_forum',      id: 'd7', n: 'n7', s: 's7', name: '校园墙归档区留档' }
+        ];
+
+        // 统计唯一证据数（按 key 去重）
+        function clueCount() {
+            var keys = {};
+            CLUES.forEach(function(c) {
+                try { if (localStorage.getItem(c.key) === '1') keys[c.key] = true; } catch(e) {}
+            });
+            return Object.keys(keys).length;
         }
+
+        function renderEvidence() {
+            CLUES.forEach(function(c) {
+                var got = false;
+                try { got = localStorage.getItem(c.key) === '1'; } catch(e) {}
+                var dot = document.getElementById(c.id);
+                var name = document.getElementById(c.n);
+                var status = document.getElementById(c.s);
+                if (got) {
+                    dot.className = 'dot got'; dot.textContent = '✓';
+                    name.classList.remove('missed');
+                    status.textContent = '已收集'; status.className = 'status got';
+                } else {
+                    dot.className = 'dot miss'; dot.textContent = '';
+                    name.classList.add('missed');
+                    status.textContent = '未收集'; status.className = 'status';
+                }
+            });
+            if (clueCount() < 5) {
+                document.getElementById('warn').classList.add('on');
+                document.getElementById('btnReport').classList.add('disabled');
+            }
+        }
+
+        function submitReport() {
+            if (clueCount() < 5) {
+                document.getElementById('warn').classList.add('on');
+                return;
+            }
+            // 证据充足 → 好结局
+            document.getElementById('toast').style.display = 'block';
+            document.getElementById('btnReport').disabled = true;
+            document.getElementById('btnReport').textContent = '✅ 已提交';
+            document.getElementById('btnReport').style.opacity = 0.7;
+            document.getElementById('btnLi').disabled = true;
+            document.getElementById('btnLi').style.opacity = 0.4;
+        }
+
+        function callLi() {
+            // 把证据先交给级部主任 → 坏结局「点名」
+            window.location.href = 'badend1.html';
+        }
+
+        renderEvidence();
     </script>
 </body>
 </html>

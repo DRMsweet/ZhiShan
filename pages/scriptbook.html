@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常规抄写本</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+        body { background: #232d3b; padding: 30px 20px 60px; }
+        .topbar { max-width: 760px; margin: 0 auto 20px; display: flex; align-items: center; gap: 12px; }
+        .progress { background: #3d4f63; color: #dfe6ec; padding: 4px 12px; border-radius: 999px; font-size: 12px; font-family: monospace; }
+        .back { color: #8a97a5; text-decoration: none; font-size: 13px; }
+        .back:hover { color: #aebccb; }
+        .book {
+            max-width: 760px; margin: 0 auto; background: #f2eeda;
+            border-radius: 4px; padding: 44px 54px;
+            box-shadow: 0 14px 36px rgba(0,0,0,0.45);
+            font-family: "KaiTi", "STKaiti", "Songti SC", serif;
+            position: relative;
+        }
+        .book::after { content: ""; position: absolute; inset: 0; border-radius: 4px; background: repeating-linear-gradient(0deg, rgba(120,100,60,0.04) 0 2px, transparent 2px 4px); pointer-events: none; }
+        .book-title { text-align: center; font-size: 22px; letter-spacing: 10px; color: #3a2e1a; margin-bottom: 6px; }
+        .book-sub { text-align: center; font-size: 12px; color: #8a7a50; margin-bottom: 26px; }
+        .rule { font-size: 15.5px; line-height: 2.2; color: #4a4030; margin-bottom: 10px; }
+        .rule .no { color: #8a7a50; font-size: 13px; margin-right: 8px; }
+        .rule.hl { background: #fff3d0; border-left: 4px solid #c9a227; padding: 6px 12px; }
+        .rule.hl .no { color: #8f6a1a; }
+        .page-break { border-top: 1px dashed #c9b98a; margin: 28px 0; }
+        .sign-page { background: #efe8d2; border: 1px solid #d8cba8; border-radius: 6px; padding: 20px 24px; }
+        .sign-page h3 { font-size: 14px; color: #5a4a2a; margin-bottom: 12px; }
+        .names { font-family: "KaiTi", serif; font-size: 13px; line-height: 2.4; color: #6a5a30; max-height: 210px; overflow-y: auto; padding-right: 8px; }
+        .names .row { display: flex; gap: 18px; }
+        .names .year { color: #a09060; font-size: 11px; width: 52px; flex-shrink: 0; }
+        .names .fresh { color: #8f3d3d; font-weight: 700; }
+        .names .you { color: #8f3d3d; font-weight: 700; text-decoration: underline; animation: pulse 1.6s infinite; }
+        @keyframes pulse { 50% { opacity: 0.4; } }
+        .ink-note { font-size: 12.5px; color: #8f3d3d; margin-top: 12px; line-height: 1.9; font-family: sans-serif; }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <span class="progress">13/16</span>
+        <a class="back" href="../desk.html">← 返回终端</a>
+    </div>
+
+    <div class="book">
+        <div class="book-title">蓬莱一中学生常规</div>
+        <div class="book-sub">2025 年 12 月 20 日 收 · 扫描件 · 共 48 条</div>
+
+        <div class="rule"><span class="no">第一条</span>学生应当服从值班教师的管理，不得顶撞、不得拖延、不得反问。</div>
+        <div class="rule"><span class="no">第二条</span>扣分记录以值班教师当场登记为准，任何人不得质疑。</div>
+        <div class="rule"><span class="no">第三条</span>每扣 1 分，须手抄《常规》一遍并上交级部，落款注明班级、姓名、日期。</div>
+        <div class="rule"><span class="no">第四条</span>学生往返宿舍的路上必须跑起来，节省时间，不得慢走逗留。</div>
+        <div class="rule"><span class="no">第五条</span>熄灯后卧床就寝，不得交谈，不得应答走廊内任何呼唤。</div>
+        <div class="rule"><span class="no">第六条</span>午休及夜间查宿期间，床上不得存放与学习无关的物品。</div>
+        <div class="rule"><span class="no">第七条</span>早自习下课后应前往食堂就餐，不得趴在教室桌上睡觉。</div>
+        <div class="rule"><span class="no">第八条</span>上课期间不得在走廊逗留，见到巡查教师应主动避让。</div>
+        <div class="rule"><span class="no">第十一条</span>被扣分学生应感恩学校的管教，抄写时须心存敬畏。</div>
+        <div class="rule"><span class="no">第十九条</span>不得在夜间结伴前往封闭区域，不得翻越围挡。</div>
+        <div class="rule"><span class="no">第三十二条</span>考试成绩不理想的学生，应主动增加抄写量，向学校汇报思想。</div>
+        <div class="rule hl"><span class="no">第四十七条</span><strong>夜间听到有人喊自己的名字，无论声音多熟悉，不得应答，不得开门，不得开灯。</strong></div>
+        <div class="rule"><span class="no">第四十八条</span>以上规定自公布之日起施行，最终解释权归校长室。</div>
+
+        <div class="page-break"></div>
+
+        <div class="sign-page">
+            <h3>📜 落款登记页（扫描件 · 节选）</h3>
+            <div class="names">
+                <div class="row"><span class="year">1998年</span><span>郑*华　刘*军　孙*丽　王*明　赵*芳　李*强</span></div>
+                <div class="row"><span class="year">1999年</span><span>周*敏　吴*刚　冯*英　陈*平　蒋*梅</span></div>
+                <div class="row"><span class="year">2005年</span><span>林*　于*涛　张*　马*娜　高*　崔*</span></div>
+                <div class="row"><span class="year">2018年</span><span>方*　罗*　宋*　唐*　许*　韩*　曹*</span></div>
+                <div class="row"><span class="year">2024年</span><span>孙某　刘某　赵某　周某　吴某</span></div>
+                <div class="row"><span class="year">2025年</span><span class="fresh">王*　李*　于（字迹潦草）　陈　葛</span></div>
+                <div class="row"><span class="year">2025.12</span><span class="you">姜</span></div>
+            </div>
+            <div class="ink-note">
+                ✎ 你还没交过常规。可最后一行的"姜"，是谁写的？<br>
+                ✎ 葛的批注：1998 年起 27 年，每一年落款人数都在增加，2018 年之后开始出现"空行"——被圈掉的名字，后面不会再有人提。
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 证据标记：访问过常规抄写本
+        localStorage.setItem('zs_clue_scriptbook', '1');
+    </script>
+</body>
+</html>

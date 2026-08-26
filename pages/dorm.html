@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>抉择前夜</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+        body { background: #0a0e14; padding: 30px 20px 60px; min-height: 100vh; }
+        .topbar { max-width: 720px; margin: 0 auto 20px; display: flex; align-items: center; gap: 12px; }
+        .progress { background: #3d4f63; color: #dfe6ec; padding: 4px 12px; border-radius: 999px; font-size: 12px; font-family: monospace; }
+        .back { color: #8a97a5; text-decoration: none; font-size: 13px; }
+        .back:hover { color: #aebccb; }
+        .room {
+            max-width: 720px; margin: 0 auto; background: #10151c;
+            border: 1px solid #1f2937; border-radius: 14px; padding: 40px 46px;
+            box-shadow: 0 16px 44px rgba(0,0,0,0.6); position: relative;
+            color: #c8d2dc;
+        }
+        .moon { font-size: 40px; text-align: center; margin-bottom: 16px; filter: drop-shadow(0 0 12px rgba(150,180,220,0.3)); }
+        .room h1 { font-size: 20px; text-align: center; color: #dfe6ec; margin-bottom: 20px; letter-spacing: 4px; }
+        .room p { font-size: 15px; line-height: 2.1; color: #aebccb; text-indent: 2em; margin-bottom: 14px; }
+        .room .sound-line { text-align: center; color: #4a5568; font-size: 12px; margin: 18px 0; letter-spacing: 3px; }
+        .footstep { text-align: center; font-size: 15px; color: #8b98a9; margin: 6px 0; font-family: monospace; opacity: 0; transition: opacity 0.5s; }
+        .footstep.on { opacity: 1; }
+        .door-line { text-align: center; color: #e5484d; font-size: 13px; margin: 16px 0; display: none; }
+        .door-line.on { display: block; animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0.3; } }
+        .choices { display: flex; gap: 14px; margin-top: 26px; }
+        .choice {
+            flex: 1; padding: 16px; border-radius: 10px; border: 1px solid #2a3547;
+            background: #161d27; color: #dfe6ec; font-size: 14px; cursor: pointer;
+            transition: all 0.15s; line-height: 1.6;
+        }
+        .choice:hover { border-color: #4a90d9; background: #1c2634; }
+        .choice .key { color: #4a90d9; font-weight: 700; }
+        .choice.danger:hover { border-color: #e5484d; }
+        .choice .key.danger { color: #e5484d; }
+        .hint2 { text-align: center; color: #4a5568; font-size: 12px; margin-top: 18px; }
+        #story { display: none; }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <span class="progress">15/16</span>
+        <a class="back" href="../desk.html">← 返回终端</a>
+    </div>
+
+    <div class="room">
+        <div class="moon">🌙</div>
+        <h1>12 月 24 日 · 夜</h1>
+
+        <div id="intro">
+            <p>证据袋已经装好：扣分登记表、常规抄写本、值班日志、监控回放、旧楼档案、校医室记录。</p>
+            <p>明天一早，你要把它交给教育局纪检科。于把挂件系回了你的书包上："带上它。它镇得住。"</p>
+            <p>你躺在宿舍的床上，盯着天花板。宿舍里安静得能听见自己的心跳。</p>
+            <div class="sound-line">—— 22:40 ——</div>
+            <div class="footstep" id="fs1">……嗒。</div>
+            <div class="footstep" id="fs2">嗒……嗒。</div>
+            <div class="footstep" id="fs3">嗒……嗒……嗒。</div>
+            <div class="door-line" id="doorLine">🚪 脚步声停在了你的门口。</div>
+        </div>
+
+        <div id="story">
+            <p>脚步声在门外停住了。</p>
+            <p>你知道查宿老师已经走了——22:30 结束，现在是 22:47。</p>
+            <p>走廊里，有东西在呼吸。很轻，隔着门板，像贴着门缝在听。</p>
+            <p>然后，一个声音响起来。很熟悉——像你妈妈，又像李志胜主任，又像你自己的声音，叠在一起，从门缝里渗进来：</p>
+            <p style="text-align:center; color:#e5484d; font-size:16px; letter-spacing:2px;">"姜……开门。"</p>
+            <div class="sound-line">——《常规》第五条的忠告在脑子里回响：<br>夜间听到有人喊自己的名字，无论声音多熟悉，不得应答，不得开门，不得开灯。</div>
+        </div>
+
+        <div class="choices" id="choices">
+            <button class="choice" id="openBtn" onclick="openDoor()">
+                <span class="key danger">A. 起身开门</span><br>万一真的是同学有急事呢
+            </button>
+            <button class="choice" id="hideBtn" onclick="hideUnder()">
+                <span class="key">B. 屏住呼吸，装睡</span><br>无论多熟悉，不应答，不开门
+            </button>
+        </div>
+        <div class="hint2">—— 第四十七条：夜间听到有人喊自己的名字，不得应答，不得开门 ——</div>
+    </div>
+
+    <script>
+        // 脚步声动画
+        setTimeout(() => { document.getElementById('fs1').classList.add('on'); }, 800);
+        setTimeout(() => { document.getElementById('fs2').classList.add('on'); }, 2000);
+        setTimeout(() => { document.getElementById('fs3').classList.add('on'); }, 3400);
+        setTimeout(() => {
+            document.getElementById('doorLine').classList.add('on');
+            document.getElementById('intro').style.display = 'none';
+            document.getElementById('story').style.display = 'block';
+        }, 5200);
+
+        function openDoor() {
+            window.location.href = 'badend2.html';
+        }
+        function hideUnder() {
+            var btn = document.getElementById('hideBtn');
+            btn.textContent = '……它走了。你熬到了天亮。';
+            btn.disabled = true;
+            btn.style.opacity = 0.7;
+            document.getElementById('openBtn').disabled = true;
+            document.getElementById('openBtn').style.opacity = 0.4;
+            document.getElementById('doorLine').textContent = '🚪 门外的呼吸声渐渐远了。';
+            document.getElementById('doorLine').style.color = '#22c55e';
+            setTimeout(() => { window.location.href = 'final.html'; }, 2200);
+        }
+    </script>
+</body>
+</html>
