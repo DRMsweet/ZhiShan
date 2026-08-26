@@ -19,6 +19,8 @@
         .restart { display: inline-block; margin-top: 36px; padding: 12px 40px; border: 1px solid #2a3547; border-radius: 999px; color: #8b98a9; text-decoration: none; font-size: 14px; transition: all 0.15s; }
         .restart:hover { border-color: #4a90d9; color: #dfe6ec; }
     </style>
+
+<script src="../sound.js"></script>
 </head>
 <body>
     <div class="end">
@@ -37,5 +39,9 @@
         <p class="dark">—— 那晚起，脚步声每晚停在你门口。 ——</p>
         <a class="restart" href="../desk.html">↺ 回到教学楼终端</a>
     </div>
+<script>
+        // 坏结局：低沉缓慢的心跳
+        if (window.Sound) { Sound.setTension(1); Sound.stopWind(); }
+    </script>
 </body>
 </html>

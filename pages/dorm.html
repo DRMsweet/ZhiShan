@@ -39,6 +39,8 @@
         .hint2 { text-align: center; color: #4a5568; font-size: 12px; margin-top: 18px; }
         #story { display: none; }
     </style>
+
+<script src="../sound.js"></script>
 </head>
 <body>
     <div class="topbar">
@@ -99,17 +101,25 @@
             window.location.replace('../desk.html');
         }
 
-        // 脚步声动画
-        setTimeout(() => { document.getElementById('fs1').classList.add('on'); }, 800);
-        setTimeout(() => { document.getElementById('fs2').classList.add('on'); }, 2000);
-        setTimeout(() => { document.getElementById('fs3').classList.add('on'); }, 3400);
+        // 恐怖音效：心跳加速到极限 + 脚步声逼近
+        if (window.Sound) {
+            Sound.setTension(9);
+            Sound.heartbeat();
+        }
+
+        // 脚步声动画（同步音效）
+        setTimeout(() => { document.getElementById('fs1').classList.add('on'); if (window.Sound) Sound.footsteps(1); }, 800);
+        setTimeout(() => { document.getElementById('fs2').classList.add('on'); if (window.Sound) Sound.footsteps(1); }, 2000);
+        setTimeout(() => { document.getElementById('fs3').classList.add('on'); if (window.Sound) Sound.footsteps(1); }, 3400);
         setTimeout(() => {
             document.getElementById('doorLine').classList.add('on');
             document.getElementById('intro').style.display = 'none';
             document.getElementById('story').style.display = 'block';
+            if (window.Sound) Sound.scare();   // 脚步声停在门口 → 惊吓
         }, 5200);
 
         function openDoor() {
+            if (window.Sound) Sound.scare();
             window.location.href = 'badend2.html';
         }
         function hideUnder() {
@@ -121,6 +131,7 @@
             document.getElementById('openBtn').style.opacity = 0.4;
             document.getElementById('doorLine').textContent = '🚪 门外的呼吸声渐渐远了。';
             document.getElementById('doorLine').style.color = '#22c55e';
+            if (window.Sound) { Sound.setTension(2); Sound.heartbeat(); } // 呼吸放缓，心跳慢下来
             setTimeout(() => { window.location.href = 'final.html'; }, 2200);
         }
     </script>

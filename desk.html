@@ -129,7 +129,18 @@
             padding: 6px 12px; border-radius: 8px;
             font-family: monospace; font-size: 0.85rem; z-index: 9999;
         }
+        /* --- 音效开关 --- */
+        .sound-toggle {
+            position: fixed; bottom: 20px; left: 20px; z-index: 9999;
+            background: rgba(20,28,40,0.75); color: #aebccb;
+            border: 1px solid rgba(255,255,255,0.15); border-radius: 999px;
+            padding: 6px 14px; font-size: 12.5px; cursor: pointer;
+            transition: all 0.15s;
+        }
+        .sound-toggle:hover { border-color: #4a90d9; color: #dfe6ec; }
     </style>
+
+<script src="sound.js"></script>
 </head>
 <body>
 
@@ -213,6 +224,8 @@
     </div>
 
     <div class="progress">1/16</div>
+
+    <button class="sound-toggle" id="soundToggle" onclick="toggleSound()">🎧 开</button>
 
     <script>
         // ═══════════════════════════════════════
@@ -426,6 +439,23 @@
         function hideResults() {
             document.getElementById('search-results').style.display = 'none';
         }
+
+        // 音效开关（配合 sound.js）
+        function toggleSound() {
+            var S = window.Sound;
+            if (!S) return;
+            var next = !S.isEnabled();
+            S.setEnabled(next);
+            document.getElementById('soundToggle').textContent = '🎧 ' + (next ? '开' : '关');
+        }
+        (function () {
+            try {
+                if (window.Sound) {
+                    Sound.setTension(1);
+                    document.getElementById('soundToggle').textContent = '🎧 ' + (Sound.isEnabled() ? '开' : '关');
+                }
+            } catch (e) {}
+        })();
     </script>
 </body>
 </html>

@@ -44,6 +44,8 @@
         .log-box .green { color: #22c55e; }
         .note { max-width: 900px; margin: 18px auto 0; background: #f5ecd0; border-left: 5px solid #c9a227; padding: 14px 18px; border-radius: 0 8px 8px 0; font-size: 13.5px; line-height: 1.9; color: #5a4f35; }
     </style>
+
+<script src="../sound.js"></script>
 </head>
 <body>
     <div class="topbar">
@@ -103,6 +105,8 @@
     <script>
         // 证据标记：访问过监控页
         localStorage.setItem('zs_clue_monitor', '1');
+        // 监控室氛围：电流底噪般的紧张心跳
+        if (window.Sound) { Sound.setTension(5); }
         var playing = false;
         function playLog() {
             var btn = document.getElementById('playBtn');
@@ -117,9 +121,9 @@
                 log.innerHTML = '22:36:58 <span class="green">检测到移动目标</span> — 走廊空无一人…';
                 shadow.classList.add('on');
                 setTimeout(() => { ts.textContent = '22:37:31'; }, 1500);
-                setTimeout(() => { log.innerHTML = '22:37:31 <span class="red">目标停留在 317 门口</span> — 停留 47 秒'; }, 2500);
+                setTimeout(() => { log.innerHTML = '22:37:31 <span class="red">目标停留在 317 门口</span> — 停留 47 秒'; if (window.Sound) Sound.footsteps(2); }, 2500);
                 setTimeout(() => { ts.textContent = '22:39:12'; shadow.classList.remove('on'); }, 4000);
-                setTimeout(() => { log.innerHTML = '22:39:12 <span class="red">画面闪烁 — 旧楼通道门开了一条缝</span>'; }, 5000);
+                setTimeout(() => { log.innerHTML = '22:39:12 <span class="red">画面闪烁 — 旧楼通道门开了一条缝</span>'; if (window.Sound) Sound.scare(); }, 5000);
                 setTimeout(() => {
                     log.innerHTML = '回放结束。<span class="red">异常片段共 3 处。</span>';
                     btn.textContent = '▶ 重播';

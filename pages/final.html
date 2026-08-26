@@ -70,6 +70,8 @@
             border-radius: 999px; font-size: 14px; z-index: 999; text-align: center; line-height: 1.6;
         }
     </style>
+
+<script src="../sound.js"></script>
 </head>
 <body>
     <div class="letter">
@@ -211,6 +213,9 @@
         }
 
         renderEvidence();
+
+        // 终章氛围：心跳加剧
+        if (window.Sound) { Sound.setTension(7); Sound.heartbeat(); }
     </script>
 </body>
 </html>
