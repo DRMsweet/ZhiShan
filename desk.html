@@ -144,27 +144,27 @@
 
     <!-- 桌面图标：直接可点的入口 -->
     <div class="desktop-icons">
-        <a href="pages/chat.html" target="_blank" class="desktop-icon">
+        <a href="pages/chat.html" class="desktop-icon">
             <div class="icon-image" style="background:#3d6a8f;">💬</div>
             <div class="icon-label">班级群聊</div>
         </a>
-        <a href="pages/notice.html" target="_blank" class="desktop-icon">
+        <a href="pages/notice.html" class="desktop-icon">
             <div class="icon-image" style="background:#8f6a3d;">📢</div>
             <div class="icon-label">校园公告</div>
         </a>
-        <a href="pages/calendar.html" target="_blank" class="desktop-icon">
+        <a href="pages/calendar.html" class="desktop-icon">
             <div class="icon-image" style="background:#6a4a8f;">📅</div>
             <div class="icon-label">校历·查宿</div>
         </a>
-        <a href="pages/grades.html" target="_blank" class="desktop-icon">
+        <a href="pages/grades.html" class="desktop-icon">
             <div class="icon-image" style="background:#3d6a55;">📋</div>
             <div class="icon-label">扣分登记表</div>
         </a>
-        <a href="pages/monitor.html" target="_blank" class="desktop-icon">
+        <a href="pages/monitor.html" class="desktop-icon">
             <div class="icon-image" style="background:#2c3e50;">🎥</div>
             <div class="icon-label">监控回放</div>
         </a>
-        <a href="pages/scriptbook.html" target="_blank" class="desktop-icon">
+        <a href="pages/scriptbook.html" class="desktop-icon">
             <div class="icon-image" style="background:#8a7a55;">📖</div>
             <div class="icon-label">常规抄写本</div>
         </a>
@@ -203,12 +203,12 @@
 
     <!-- Dock -->
     <div class="dock">
-        <a href="pages/student.html" target="_blank" class="dock-link"><div class="dock-icon">👤</div></a>
-        <a href="pages/forum.html" target="_blank" class="dock-link"><div class="dock-icon">🗨️</div></a>
-        <a href="pages/locker.html" target="_blank" class="dock-link"><div class="dock-icon">🔒</div></a>
-        <a href="pages/news.html" target="_blank" class="dock-link"><div class="dock-icon">📰</div></a>
-        <a href="pages/oldbuilding.html" target="_blank" class="dock-link"><div class="dock-icon">🏚️</div></a>
-        <a href="pages/clinic.html" target="_blank" class="dock-link"><div class="dock-icon">🏥</div></a>
+        <a href="pages/student.html" class="dock-link"><div class="dock-icon">👤</div></a>
+        <a href="pages/forum.html" class="dock-link"><div class="dock-icon">🗨️</div></a>
+        <a href="pages/locker.html" class="dock-link"><div class="dock-icon">🔒</div></a>
+        <a href="pages/news.html" class="dock-link"><div class="dock-icon">📰</div></a>
+        <a href="pages/oldbuilding.html" class="dock-link"><div class="dock-icon">🏚️</div></a>
+        <a href="pages/clinic.html" class="dock-link"><div class="dock-icon">🏥</div></a>
     </div>
 
     <div class="progress">1/16</div>
@@ -393,7 +393,7 @@
                     const item = document.createElement('a');
                     item.className = 'result-item';
                     item.href = data.file;
-                    item.target = '_blank';
+                    
                     item.innerHTML = `
                         <div class="result-icon" style="background-color: ${data.color};">${data.icon}</div>
                         <div style="flex-grow:1">
