@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>调查笔记</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+        body { background: #232d3b; padding: 30px 20px 60px; }
+        .topbar { max-width: 720px; margin: 0 auto 20px; display: flex; align-items: center; gap: 12px; }
+        .back { color: #8a97a5; text-decoration: none; font-size: 13px; }
+        .back:hover { color: #aebccb; }
+        .notebook {
+            max-width: 720px; margin: 0 auto; background: #f7f5ee;
+            border-radius: 14px; padding: 34px 40px;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+        }
+        .notebook h1 { font-size: 21px; color: #1a2332; margin-bottom: 6px; display: flex; align-items: center; gap: 10px; }
+        .notebook .sub { font-size: 12.5px; color: #8a8578; margin-bottom: 20px; }
+        .counter { display: flex; align-items: center; gap: 10px; background: #eef1f5; border-radius: 10px; padding: 12px 18px; margin-bottom: 20px; }
+        .counter .num { font-size: 24px; font-weight: 700; color: #2c3e50; font-family: monospace; }
+        .counter .label { font-size: 12.5px; color: #6a7580; line-height: 1.5; }
+        .counter .bar { flex: 1; height: 8px; background: #d8dee5; border-radius: 4px; overflow: hidden; margin: 0 8px; }
+        .counter .bar i { display: block; height: 100%; width: 0; background: linear-gradient(to right, #2c6e3d, #43a047); transition: width 0.6s; }
+        .clue { display: flex; align-items: center; gap: 14px; border: 1px solid #e4dfd0; border-radius: 10px; padding: 13px 18px; margin-bottom: 10px; transition: all 0.2s; }
+        .clue .dot { width: 26px; height: 26px; border-radius: 50%; border: 2px solid #b8b0a0; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #fff; flex-shrink: 0; }
+        .clue.got .dot { background: #2c6e3d; border-color: #2c6e3d; }
+        .clue .body { flex: 1; }
+        .clue .title { font-size: 14px; font-weight: 600; color: #333; }
+        .clue .summary { font-size: 12.5px; color: #8a8578; margin-top: 3px; line-height: 1.6; }
+        .clue.miss .title { color: #a09880; }
+        .clue .goto { font-size: 12px; color: #4a90d9; text-decoration: none; white-space: nowrap; }
+        .clue.miss .goto { color: #a09880; pointer-events: none; }
+        .clue .hint-src { font-size: 11px; color: #c9a227; margin-top: 2px; }
+        .dorm-entry { display: none; margin-top: 22px; border-top: 2px dashed #e4dfd0; padding-top: 20px; text-align: center; }
+        .dorm-entry.on { display: block; animation: fadein 1s ease; }
+        @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+        .dorm-btn {
+            display: inline-block; padding: 14px 44px; border-radius: 999px;
+            background: linear-gradient(to bottom, #44566b, #2c3e50); color: #dfe6ec;
+            font-size: 15px; text-decoration: none; box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+            transition: all 0.15s;
+        }
+        .dorm-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,0.4); }
+        .dorm-locked { margin-top: 22px; border-top: 2px dashed #e4dfd0; padding-top: 18px; text-align: center; font-size: 13px; color: #a09880; line-height: 1.9; }
+        .dorm-locked .lock { font-size: 20px; }
+        .note2 { background: #f5ecd0; border-left: 4px solid #c9a227; border-radius: 0 8px 8px 0; padding: 12px 16px; margin-top: 20px; font-size: 12.5px; color: #5a4f35; line-height: 1.8; }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <a class="back" href="../desk.html">← 返回终端</a>
+    </div>
+
+    <div class="notebook">
+        <h1>📓 调查笔记</h1>
+        <div class="sub">姜 · 高二（3）班 · 这台电脑上能查到的线索，我都记在这里</div>
+
+        <div class="counter">
+            <span class="num" id="countNum">0/7</span>
+            <div class="bar"><i id="countBar"></i></div>
+            <span class="label">证据收集进度</span>
+        </div>
+
+        <div id="clueList"></div>
+
+        <div class="dorm-entry" id="dormEntry">
+            <p style="font-size:13.5px; color:#5a4a2a; margin-bottom:14px;">🌙 证据都齐了。<br>今晚宿舍楼……你还有一件重要的事要做。</p>
+            <a class="dorm-btn" href="dorm.html">前往宿舍楼 · B栋 →</a>
+        </div>
+
+        <div class="dorm-locked" id="dormLocked">
+            <div class="lock">🔒</div>
+            宿舍楼的方向，还被夜色锁着。<br>
+            把上面 7 条线索全部找齐，门才会开。
+        </div>
+
+        <div class="note2">
+            💡 找不到某条线索？去教学楼终端的搜索框，试试输入：<b>人名、地名、物品名</b>（比如老师的名字、"旧楼"、"校医室"、相关物品）。
+            终端桌面和底部 Dock 上也有直接入口。密码类线索，注意看档案和公告里的"惯例"。
+        </div>
+    </div>
+
+    <script>
+        // ═══════════════════════════════════════
+        // 线索册：读取各证据页的 localStorage 标记
+        // 7 项全齐 → 解锁宿舍入口
+        // ═══════════════════════════════════════
+        var CLUES = [
+            { key: 'zs_clue_grades',     title: '扣分登记表',      summary: '扣分明细 · 转学学生与扣分记录重合', src: '终端 · 📋 扣分登记表 / 搜"扣分"' },
+            { key: 'zs_clue_scriptbook', title: '常规抄写本·落款页', summary: '48 条常规 · 落款是点名册 · 最后一行是没交过的你', src: '终端 · 📖 常规抄写本 / 搜"抄写本"' },
+            { key: 'zs_clue_audit',      title: '值班日志',        summary: '四种脚步声 · 第四种不穿鞋 · 常规上交比扣分人多', src: '搜"值班"或"查宿舍"' },
+            { key: 'zs_clue_monitor',    title: '监控回放 CAM-07', summary: '无人的影子 · 停在 317 门口 · 旧楼通道门开缝', src: '终端 · 🎥 监控回放（点播放）' },
+            { key: 'zs_clue_oldbuilding', title: '旧楼封闭档案',   summary: '城隍庙地基 · 两份矛盾的检测报告 · 符箓与香炉', src: '终端 Dock · 🏚️ 旧楼 / 搜"旧楼"' },
+            { key: 'zs_clue_clinic',     title: '校医室记录',      summary: '听见喊名字的学生 · 就诊量三年翻倍 · 被撕的批注', src: '终端 Dock · 🏥 校医室 / 搜"校医室"' },
+            { key: 'zs_clue_forum',      title: '校园墙归档区',    summary: '2018 届学长：扣分是登记，常规是祭文', src: '校园墙归档区（账号在公告，口令在挂件背面）' }
+        ];
+
+        function evidenceCount() {
+            var n = 0;
+            CLUES.forEach(function(c) { try { if (localStorage.getItem(c.key) === '1') n++; } catch(e) {} });
+            return n;
+        }
+
+        function render() {
+            var list = document.getElementById('clueList');
+            var n = evidenceCount();
+            list.innerHTML = '';
+            CLUES.forEach(function(c) {
+                var got = false;
+                try { got = localStorage.getItem(c.key) === '1'; } catch(e) {}
+                var div = document.createElement('div');
+                div.className = 'clue ' + (got ? 'got' : 'miss');
+                div.innerHTML = got
+                    ? '<span class="dot">✓</span><div class="body"><div class="title">' + c.title + '</div><div class="summary">' + c.summary + '</div></div>'
+                    : '<span class="dot">?</span><div class="body"><div class="title">' + c.title + '（未找到）</div><div class="hint-src">🔍 ' + c.src + '</div></div>';
+                list.appendChild(div);
+            });
+
+            document.getElementById('countNum').textContent = n + '/7';
+            document.getElementById('countBar').style.width = (n / 7 * 100) + '%';
+
+            if (n >= 7) {
+                document.getElementById('dormEntry').classList.add('on');
+                document.getElementById('dormLocked').style.display = 'none';
+            } else {
+                document.getElementById('dormLocked').style.display = 'block';
+            }
+        }
+
+        render();
+    </script>
+</body>
+</html>

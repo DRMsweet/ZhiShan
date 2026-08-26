@@ -32,7 +32,8 @@
 | 12/16 | `pages/oldbuilding.html` | 旧楼档案 ⭐证据 | 城隍庙地基平面图、5.30 vs 6.4 检测矛盾、符箓香炉 |
 | 13/16 | `pages/scriptbook.html` | 常规抄写本 ⭐证据 | 48 条"祷词"（第47条禁应呼唤）、叠名字的落款页 |
 | 14/16 | `pages/clinic.html` | 校医室记录 ⭐证据 | "听见喊名字"的学生、就诊量三年翻倍、被撕的批注 |
-| 15/16 | `pages/dorm.html` | 抉择前夜·宿舍 | 脚步声停在门口：开门=坏结局，装睡=进终章 |
+| — | `pages/clues.html` | 调查笔记 📓 | Dock 📓 随时查看证据进度；7 项集齐后出现宿舍入口 |
+| 15/16 | `pages/dorm.html` | 抉择前夜·宿舍 | 🔒 需集齐全部 7 项证据才解锁；脚步声停在门口：开门=坏结局，装睡=进终章 |
 | 终章 | `pages/final.html` | 最后一篇《常规》 | 证据收集检查 + 三向抉择 |
 
 ### 💀 坏结局（3 个）
@@ -53,9 +54,17 @@
 
 ## 🕹️ 好结局条件（证据系统）
 
-final.html 会检查 localStorage 证据标记，7 项证据收集 ≥5 项才能提交：
-- ⭐扣分登记表（grades）· ⭐常规抄写本（scriptbook）· ⭐值班日志（audit）
-- ⭐监控回放（monitor）· ⭐旧楼档案（oldbuilding）· ⭐校医室（clinic）· ⭐校园墙归档（forum）
+- 7 项证据**全部集齐**后，终端搜索"宿舍"、或调查笔记（Dock 📓）里会出现宿舍入口
+- `final.html` 检查 localStorage 证据标记，**7 项全齐**才能提交（证据不足提交 → 坏结局「名单」）
+- ⭐证据：扣分登记表（grades）· 常规抄写本（scriptbook）· 值班日志（audit）
+- ⭐监控回放（monitor）· 旧楼档案（oldbuilding）· 校医室（clinic）· 校园墙归档（forum）
+
+## 🧪 验证
+
+```bash
+python verify.py        # HTTP 200 + 断链 + JS 语法三项自检
+node test_clue_logic.js # 证据计数 / 宿舍解锁 / 提交阈值逻辑测试
+```
 
 ## 🚀 本地运行
 
@@ -63,12 +72,6 @@ final.html 会检查 localStorage 证据标记，7 项证据收集 ≥5 项才�
 # 任选其一，然后浏览器打开 http://localhost:8899
 python -m http.server 8899
 npx serve .
-```
-
-## 🧪 验证
-
-```bash
-python verify.py   # HTTP 200 + 断链 + JS 语法三项自检
 ```
 
 ## 🔑 剧情关键设定（改写时不要破坏）

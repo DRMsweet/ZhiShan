@@ -147,7 +147,7 @@
         // ═══════════════════════════════════════
         // 证据收集检查（localStorage 标记）
         // 关键证据页：grades/locker、scriptbook、audit、monitor、oldbuilding、clinic、forum
-        // 至少收集 5 项才能提交，否则触发坏结局「名单」
+        // 集齐全部 7 项才能提交，否则触发坏结局「名单」
         // ═══════════════════════════════════════
         var CLUES = [
             { key: 'zs_clue_grades',     id: 'd1', n: 'n1', s: 's1', name: '扣分登记表 + 常规抄写本' },
@@ -185,14 +185,14 @@
                     status.textContent = '未收集'; status.className = 'status';
                 }
             });
-            if (clueCount() < 5) {
+            if (clueCount() < 7) {
                 document.getElementById('warn').classList.add('on');
                 document.getElementById('btnReport').classList.add('disabled');
             }
         }
 
         function submitReport() {
-            if (clueCount() < 5) {
+            if (clueCount() < 7) {
                 document.getElementById('warn').classList.add('on');
                 return;
             }

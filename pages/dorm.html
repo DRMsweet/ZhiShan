@@ -82,6 +82,23 @@
     </div>
 
     <script>
+        // ═══════════════════════════════════════
+        // 守卫：宿舍楼只在集齐全部 7 项证据后开放
+        // 直接访问但证据不足 → 重定向回教学楼终端
+        // ═══════════════════════════════════════
+        function evidenceCount() {
+            var keys = [
+                'zs_clue_grades', 'zs_clue_scriptbook', 'zs_clue_audit',
+                'zs_clue_monitor', 'zs_clue_oldbuilding', 'zs_clue_clinic', 'zs_clue_forum'
+            ];
+            var n = 0;
+            keys.forEach(function(k) { try { if (localStorage.getItem(k) === '1') n++; } catch(e) {} });
+            return n;
+        }
+        if (evidenceCount() < 7) {
+            window.location.replace('../desk.html');
+        }
+
         // 脚步声动画
         setTimeout(() => { document.getElementById('fs1').classList.add('on'); }, 800);
         setTimeout(() => { document.getElementById('fs2').classList.add('on'); }, 2000);

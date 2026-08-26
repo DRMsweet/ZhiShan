@@ -203,6 +203,7 @@
 
     <!-- Dock -->
     <div class="dock">
+        <a href="pages/clues.html" class="dock-link"><div class="dock-icon">📓</div></a>
         <a href="pages/student.html" class="dock-link"><div class="dock-icon">👤</div></a>
         <a href="pages/forum.html" class="dock-link"><div class="dock-icon">🗨️</div></a>
         <a href="pages/locker.html" class="dock-link"><div class="dock-icon">🔒</div></a>
@@ -388,12 +389,13 @@
             let found = false;
             for (const keyword in FILE_DATABASE) {
                 if (keyword.toLowerCase().trim() === query) {
+                    // 宿舍入口：需集齐全部 7 项证据后才会出现
+                    if (keyword === '宿舍' && evidenceCount() < 7) continue;
                     const data = FILE_DATABASE[keyword];
                     found = true;
                     const item = document.createElement('a');
                     item.className = 'result-item';
                     item.href = data.file;
-                    
                     item.innerHTML = `
                         <div class="result-icon" style="background-color: ${data.color};">${data.icon}</div>
                         <div style="flex-grow:1">
@@ -408,6 +410,17 @@
             if (!found) {
                 resultsDiv.innerHTML = '<div style="padding: 10px 16px; color: #7a8896;">未找到匹配结果</div>';
             }
+        }
+
+        // 证据收集统计（与 final.html / clues.html 一致的 7 项证据）
+        function evidenceCount() {
+            var keys = [
+                'zs_clue_grades', 'zs_clue_scriptbook', 'zs_clue_audit',
+                'zs_clue_monitor', 'zs_clue_oldbuilding', 'zs_clue_clinic', 'zs_clue_forum'
+            ];
+            var n = 0;
+            keys.forEach(function(k) { try { if (localStorage.getItem(k) === '1') n++; } catch(e) {} });
+            return n;
         }
 
         function hideResults() {
