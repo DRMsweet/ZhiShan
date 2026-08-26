@@ -26,6 +26,16 @@
         .msg.self .time { text-align: right; }
         .highlight .bubble { background: #f5ecd0 !important; border: 1px dashed #c9a227; }
         .sys { text-align: center; font-size: 12px; color: #a09880; margin: 16px 0; }
+        /* 新消息（未读）高亮 */
+        .msg.fresh .bubble { border: 1px solid #4a90d9; box-shadow: 0 0 0 1px rgba(74,144,217,0.35); animation: msgIn 0.6s ease; }
+        .msg.fresh .time { color: #4a90d9; font-weight: 600; }
+        @keyframes msgIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+        .unread-banner {
+            display: none; text-align: center; background: rgba(74,144,217,0.12);
+            border: 1px dashed #4a90d9; color: #4a90d9; font-size: 12.5px;
+            padding: 8px; border-radius: 8px; margin: 10px 0; cursor: pointer;
+        }
+        .unread-banner.on { display: block; animation: msgIn 0.4s ease; }
     </style>
 
 <script src="../sound.js"></script>
@@ -101,7 +111,126 @@
             <div class="msg other"><div><div class="bubble">……扣得多，抄得多。抄得多，才看得清。</div><div class="time">09:20</div></div></div>
             <div class="msg other"><div><div class="bubble">你这话说得有点瘆人。</div><div class="time">09:21</div></div></div>
             <div class="msg other"><div><div class="bubble">常规我抄第五遍了。落款那行字，已经开始不像我写的了。</div><div class="time">09:22</div></div></div>
+
+            <div class="unread-banner" id="unreadBanner" onclick="markAllRead()">📩 群聊有新消息，点击查看</div>
+            <div id="extraMsgs"></div>
         </div>
     </div>
+
+    <script>
+        // ═══════════════════════════════════════
+        // 关键节点群聊消息：随着你的调查进度，四人组会陆续发来新消息
+        // 触发条件 = 对应证据标记（localStorage）；已读状态存 zs_chat_read
+        // ═══════════════════════════════════════
+        var NODES = [
+            { id: 'forum',   key: 'zs_clue_forum',      title: '—— 09:45 ——', msgs: [
+                { w: 'o', t: '09:45', text: '谁动了校园墙归档区？那地方锁了快十年了吧……' },
+                { w: 's', t: '09:46', text: '是我。里面有些东西，你们该看看。' },
+                { w: 'o', t: '09:46', text: '管理员账号还能用？！我记得是 2018 届那位学长留下的……他后来不是被"转学"了吗。' },
+                { w: 'o', t: '09:47', text: '所以那位学长留下的东西，就是这学校不对劲的证据？' },
+                { w: 'o', t: '09:48', text: '（葛）别声张。能看到，就说明它允许你看到。' }
+            ]},
+            { id: 'news',    key: 'zs_clue_news',       title: '—— 10:05 ——', msgs: [
+                { w: 'o', t: '10:05', text: '校史特刊说旧楼建在庙旧址上……我家老人都说那地方不干净。' },
+                { w: 'o', t: '10:06', text: '（葛）1998 年 6 月 1 日。你记得 12.20 寇校长带队"安全巡查"旧楼吗？每年一次，雷打不动。' },
+                { w: 'o', t: '10:07', text: '每年巡查完，就有人转学。' },
+                { w: 'o', t: '10:08', text: '……你们能不能别在群里说这个，我有点害怕。' }
+            ]},
+            { id: 'monitor', key: 'zs_clue_monitor',    title: '—— 10:20 ——', msgs: [
+                { w: 'o', t: '10:20', text: '监控回放里那个影子……我室友说他上周也见过，就在 317 门口，站着不动，可地上没有对应的脚。' },
+                { w: 'o', t: '10:21', text: '……317 是我隔壁。它老来我们这层，是不是因为我挂件被没收了。' },
+                { w: 'o', t: '10:22', text: '（葛）护身符没了，自然会找上门。所以姜，挂件先别急着还，留着。' }
+            ]},
+            { id: 'old',     key: 'zs_clue_oldbuilding', title: '—— 10:35 ——', msgs: [
+                { w: 'o', t: '10:35', text: '我妈说，旧楼那块地以前是城隍庙，庙塌了几十年，地基一直没人敢动。' },
+                { w: 'o', t: '10:36', text: '那 1998 年说的"地基沉降"，岂不就是……' },
+                { w: 'o', t: '10:37', text: '（葛）封的不是楼，是底下压着的东西。检测报告 5 天差 50 倍，糊弄谁呢。' }
+            ]},
+            { id: 'script',  key: 'zs_clue_scriptbook', title: '—— 10:50 ——', msgs: [
+                { w: 'o', t: '10:50', text: '（葛）落款页我数完了。1998 年到现在，名字一年比一年多；2018 年之后开始有空行——被圈掉的名字，后面再没人提。' },
+                { w: 'o', t: '10:51', text: '圈掉……是"转学"那种吗。' },
+                { w: 'o', t: '10:51', text: '（葛）是"消失"。' },
+                { w: 'o', t: '10:52', text: '你抄了五遍……你的名字，是不是也在往下长。' },
+                { w: 'o', t: '10:53', text: '（葛）……早晚的事。' }
+            ]},
+            { id: 'clinic',  key: 'zs_clue_clinic',     title: '—— 11:10 ——', msgs: [
+                { w: 'o', t: '11:10', text: '校医室那记录我看了……我同桌也被叫去过，她说校医总问"夜里有没有人喊你名字"。' },
+                { w: 'o', t: '11:11', text: '我上次路过也听见了。说"有"的学生，第二天都开始抄常规。' },
+                { w: 'o', t: '11:12', text: '（葛）不是抄。是登记。校医在帮它们筛人。' }
+            ]},
+            { id: 'dorm',    key: 'ALL',                title: '—— 22:20 宿舍楼 ——', msgs: [
+                { w: 'o', t: '22:20', text: '姜，你查到的东西，我都看完了。今晚别一个人回宿舍。' },
+                { w: 'o', t: '22:21', text: '挂件你带着。真有人喊你名字——千万别应。' },
+                { w: 'o', t: '22:22', text: '（葛）证据够了。天亮之前，别开门。' },
+                { w: 'o', t: '22:23', text: '我们都在。明天见。' }
+            ]}
+        ];
+
+        function evidenceCount() {
+            var keys = ['zs_clue_grades','zs_clue_scriptbook','zs_clue_audit',
+                'zs_clue_monitor','zs_clue_oldbuilding','zs_clue_clinic','zs_clue_forum'];
+            var n = 0;
+            keys.forEach(function (k) { try { if (localStorage.getItem(k) === '1') n++; } catch (e) {} });
+            return n;
+        }
+        function isTriggered(node) {
+            if (node.key === 'ALL') return evidenceCount() >= 7;
+            try { return localStorage.getItem(node.key) === '1'; } catch (e) { return false; }
+        }
+        function readState() {
+            try { return JSON.parse(localStorage.getItem('zs_chat_read') || '{}'); } catch (e) { return {}; }
+        }
+        function saveRead(state) {
+            try { localStorage.setItem('zs_chat_read', JSON.stringify(state)); } catch (e) {}
+        }
+
+        function renderExtra() {
+            var box = document.getElementById('extraMsgs');
+            var state = readState();
+            var hasUnread = false;
+            NODES.forEach(function (node) {
+                if (!isTriggered(node)) return;
+                var fresh = !state[node.id];
+                if (fresh) hasUnread = true;
+                var sys = document.createElement('div');
+                sys.className = 'sys'; sys.textContent = node.title;
+                box.appendChild(sys);
+                node.msgs.forEach(function (m) {
+                    var div = document.createElement('div');
+                    div.className = 'msg ' + (m.w === 's' ? 'self' : 'other') + (fresh ? ' fresh' : '');
+                    div.innerHTML = '<div><div class="bubble">' + m.text + '</div><div class="time">' + m.t + '</div></div>';
+                    box.appendChild(div);
+                });
+            });
+            if (hasUnread) {
+                setTimeout(function () {
+                    document.getElementById('unreadBanner').classList.add('on');
+                }, 800);
+            }
+        }
+
+        function markAllRead() {
+            var state = readState();
+            NODES.forEach(function (node) { if (isTriggered(node)) state[node.id] = 1; });
+            saveRead(state);
+            document.getElementById('unreadBanner').classList.remove('on');
+            var fresh = document.querySelectorAll('.msg.fresh');
+            fresh.forEach(function (el) { el.classList.remove('fresh'); });
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+        // 若没有未读，直接标记全部已读节点为已读
+        (function () {
+            var state = readState();
+            var changed = false;
+            NODES.forEach(function (node) {
+                if (isTriggered(node) && !state[node.id]) changed = true;
+            });
+            if (!changed) {
+                NODES.forEach(function (node) { if (isTriggered(node)) state[node.id] = 1; });
+                saveRead(state);
+            }
+        })();
+        renderExtra();
+    </script>
 </body>
 </html>

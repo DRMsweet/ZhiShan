@@ -36,7 +36,18 @@
             width: 80px; height: 92px; margin: 8px 0;
             display: flex; flex-direction: column; align-items: center;
             cursor: pointer; text-align: center; text-decoration: none;
+            position: relative;
         }
+        /* 群聊未读红点 */
+        .chat-badge {
+            position: absolute; top: -6px; right: -8px; z-index: 5;
+            min-width: 18px; height: 18px; border-radius: 9px;
+            background: #e5484d; color: #fff; font-size: 11px; font-weight: 700;
+            line-height: 18px; text-align: center; padding: 0 4px;
+            display: none; box-shadow: 0 0 0 2px rgba(20,28,40,0.8);
+            animation: pulse 1.6s infinite;
+        }
+        @keyframes pulse { 50% { opacity: 0.6; } }
         .icon-image {
             width: 60px; height: 60px; border-radius: 14px;
             display: flex; justify-content: center; align-items: center;
@@ -158,6 +169,7 @@
         <a href="pages/chat.html" class="desktop-icon">
             <div class="icon-image" style="background:#3d6a8f;">💬</div>
             <div class="icon-label">班级群聊</div>
+            <span class="chat-badge" id="chatBadge"></span>
         </a>
         <a href="pages/notice.html" class="desktop-icon">
             <div class="icon-image" style="background:#8f6a3d;">📢</div>
@@ -455,6 +467,28 @@
                     document.getElementById('soundToggle').textContent = '🎧 ' + (Sound.isEnabled() ? '开' : '关');
                 }
             } catch (e) {}
+        })();
+
+        // 群聊未读红点：统计已触发但未读的节点消息数
+        function chatUnread() {
+            var map = {
+                forum: 'zs_clue_forum', news: 'zs_clue_news', monitor: 'zs_clue_monitor',
+                old: 'zs_clue_oldbuilding', script: 'zs_clue_scriptbook', clinic: 'zs_clue_clinic'
+            };
+            var read = {};
+            try { read = JSON.parse(localStorage.getItem('zs_chat_read') || '{}'); } catch (e) {}
+            var n = 0;
+            for (var id in map) {
+                try { if (localStorage.getItem(map[id]) === '1' && !read[id]) n++; } catch (e) {}
+            }
+            try { if (evidenceCount() >= 7 && !read['dorm']) n++; } catch (e) {}
+            return n;
+        }
+        (function () {
+            var b = document.getElementById('chatBadge');
+            if (!b) return;
+            var n = chatUnread();
+            if (n > 0) { b.textContent = n; b.style.display = 'block'; }
         })();
     </script>
 </body>
